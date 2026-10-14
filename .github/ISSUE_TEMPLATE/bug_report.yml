@@ -1,0 +1,30 @@
+name: Bug report
+description: Report a reproducible Moo Mesa or Bucky core issue
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Core version and Pocket OS firmware
+    validations:
+      required: true
+  - type: dropdown
+    id: game
+    attributes:
+      label: Game
+      options:
+        - Wild West C.O.W.-Boys of Moo Mesa - EAB
+        - Bucky O'Hare - EAB
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Stage, action and steps to reproduce
+      description: Include expected and observed behavior; mention Dock/controllers if relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Settings and other context
+      description: Do not attach ROMs, saves or memory dumps.

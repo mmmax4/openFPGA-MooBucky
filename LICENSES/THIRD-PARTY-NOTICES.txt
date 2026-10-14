@@ -1,0 +1,2061 @@
+File: core/modules/cpu-fx68k/fx68k.sv
+//
+// FX68K
+//
+// M68000 cycle accurate, fully synchronous
+// Copyright (c) 2018,2021 by Jorge Cwik
+// 
+// TODO:
+// - Everything except bus retry already implemented.
+
+
+File: core/modules/cpu-fx68k/fx68kAlu.sv
+//
+// FX 68K
+//
+// M68K cycle accurate, fully synchronous
+// Copyright (c) 2018 by Jorge Cwik
+//
+// ALU
+//
+
+
+File: core/modules/cpu-tv80/tv80_alu.v
+//
+// TV80 8-Bit Microprocessor Core
+// Based on the VHDL T80 core by Daniel Wallner (jesus@opencores.org)
+//
+// Copyright (c) 2004 Guy Hutchison (ghutchis@opencores.org)
+//
+// Permission is hereby granted, free of charge, to any person obtaining a 
+// copy of this software and associated documentation files (the "Software"), 
+// to deal in the Software without restriction, including without limitation 
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+// and/or sell copies of the Software, and to permit persons to whom the 
+// Software is furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included 
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+// SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+File: core/modules/cpu-tv80/tv80_core.v
+//
+// TV80 8-Bit Microprocessor Core
+// Based on the VHDL T80 core by Daniel Wallner (jesus@opencores.org)
+//
+// Copyright (c) 2004 Guy Hutchison (ghutchis@opencores.org)
+//
+// Permission is hereby granted, free of charge, to any person obtaining a 
+// copy of this software and associated documentation files (the "Software"), 
+// to deal in the Software without restriction, including without limitation 
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+// and/or sell copies of the Software, and to permit persons to whom the 
+// Software is furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included 
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+// SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+File: core/modules/cpu-tv80/tv80_mcode.v
+//
+// TV80 8-Bit Microprocessor Core
+// Based on the VHDL T80 core by Daniel Wallner (jesus@opencores.org)
+//
+// Copyright (c) 2004,2007 Guy Hutchison (ghutchis@opencores.org)
+//
+// Permission is hereby granted, free of charge, to any person obtaining a 
+// copy of this software and associated documentation files (the "Software"), 
+// to deal in the Software without restriction, including without limitation 
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+// and/or sell copies of the Software, and to permit persons to whom the 
+// Software is furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included 
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+// SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+File: core/modules/cpu-tv80/tv80_reg.v
+//
+// TV80 8-Bit Microprocessor Core
+// Based on the VHDL T80 core by Daniel Wallner (jesus@opencores.org)
+//
+// Copyright (c) 2004 Guy Hutchison (ghutchis@opencores.org)
+//
+// Permission is hereby granted, free of charge, to any person obtaining a 
+// copy of this software and associated documentation files (the "Software"), 
+// to deal in the Software without restriction, including without limitation 
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+// and/or sell copies of the Software, and to permit persons to whom the 
+// Software is furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included 
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+// SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+File: core/platform/pocket/audio/audio_mixer.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket Audio Mixer
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/audio/filters/arcade_filters.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket Arcade Audio Filters
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/audio/filters/audio_filters.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Audio Filters
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+// Copyright (c) 2020, Alexey Melnikov <pour.garbage@gmail.com>
+//
+// This source file is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published
+// by the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+// General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/audio/filters/audio_mix.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Audio Mix
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+// Copyright (c) 2020, Alexey Melnikov <pour.garbage@gmail.com>
+//
+// This source file is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published
+// by the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+// General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/audio/filters/dc_blocker.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// DC blocker filter using a simplified IIR structure.
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+// Copyright (c) 2020, Alexey Melnikov <pour.garbage@gmail.com>
+//
+// This source file is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published
+// by the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+// General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+//
+//------------------------------------------------------------------------------
+//
+// It utilizes feedback to achieve filtering, operating on a delayed version of
+// the input signal (x0), a delayed version of the output signal (y1), and the
+// current input and output signals (x1 and y0, respectively).
+// The filter coefficients are determined by the sample rate of the input signal.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/audio/filters/filter_loader.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket Audio Filter Loader
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/audio/filters/filters_rom.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket Audio Filters ROM
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/audio/filters/iir_filter.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// 3-tap IIR filter for 2 channels.
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+// Copyright (c) 2020, Alexey Melnikov <pour.garbage@gmail.com>
+//
+// This source file is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published
+// by the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+// General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+//
+//------------------------------------------------------------------------------
+//
+// Can be converted to:
+// - 2-tap (coeff_x2 = 0, coeff_y2 = 0)
+// - 1-tap (coeff_x1,2 = 0, coeff_y1,2 = 0)
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/audio/filters/iir_filter_tap.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Infinite Impulse Response (IIR) filter tap.
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+// Copyright (c) 2020, Alexey Melnikov <pour.garbage@gmail.com>
+//
+// This source file is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published
+// by the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+// General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+//
+//------------------------------------------------------------------------------
+//
+// The iir_filter_tap module implements an infinite impulse response (IIR) filter
+// with one tap. It takes in input data x, previous output data y, and an input z
+// and calculates the output tap using a set of coefficients cx and cy. The
+// coefficients are used to multiply the input data and previous output data,
+// and the resulting values are then added together to produce the output tap.
+// The module stores intermediate values in a logic RAM, and updates the values
+// on each clock cycle based on the control signals ce and ch. The module uses
+// a Verilog function to perform the multiplication of the input data with the
+// coefficients.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/audio/pocket_i2s.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket I2S Audio Interface
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/bsp/pocket/apf_top.sv
+// Software License Agreement
+
+// The software supplied herewith by Analogue Enterprises Limited (the "Company”),
+// the Analogue Pocket Framework (“APF”), is provided and licensed to you, the
+// Company's customer, solely for use in designing, testing and creating
+// applications for use with Company's Products or Services.  The software is
+// owned by the Company and/or its licensors, and is protected under applicable
+// laws, including, but not limited to, U.S. copyright law. All rights are
+// reserved. By using the APF code you are agreeing to the terms of the End User
+// License Agreement (“EULA”) located at [https://www.analogue.link/pocket-eula]
+// and incorporated herein by reference. To the extent any use of the APF requires
+// application of the MIT License or the GNU General Public License and terms of
+// this APF Software License Agreement and EULA are inconsistent with such license,
+// the applicable terms of the MIT License or the GNU General Public License, as
+// applicable, will prevail.
+
+// THE SOFTWARE IS PROVIDED "AS-IS" AND WE EXPRESSLY DISCLAIM ANY IMPLIED
+// WARRANTIES TO THE FULLEST EXTENT PROVIDED BY LAW, INCLUDING BUT NOT LIMITED TO,
+// ANY WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE OR
+// NON-INFRINGEMENT. TO THE EXTENT APPLICABLE LAWS PROHIBIT TERMS OF USE FROM
+// DISCLAIMING ANY IMPLIED WARRANTY, SUCH IMPLIED WARRANTY SHALL BE LIMITED TO THE
+// MINIMUM WARRANTY PERIOD REQUIRED BY LAW, AND IF NO SUCH PERIOD IS REQUIRED,
+// THEN THIRTY (30) DAYS FROM FIRST USE OF THE SOFTWARE. WE CANNOT GUARANTEE AND
+// DO NOT PROMISE ANY SPECIFIC RESULTS FROM USE OF THE SOFTWARE. WITHOUT LIMITING
+// THE FOREGOING, WE DO NOT WARRANT THAT THE SOFTWARE WILL BE UNINTERRUPTED OR
+// ERROR-FREE.  IN NO EVENT WILL WE BE LIABLE TO YOU OR ANY OTHER PERSON FOR ANY
+// INDIRECT, CONSEQUENTIAL, EXEMPLARY, INCIDENTAL, SPECIAL OR PUNITIVE DAMAGES,
+// INCLUDING BUT NOT LIMITED TO, LOST PROFITS ARISING OUT OF YOUR USE, OR
+// INABILITY TO USE, THE SOFTWARE, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY
+// OF SUCH DAMAGES. UNDER NO CIRCUMSTANCES SHALL OUR LIABILITY TO YOU FOR ANY
+// CLAIM OR CAUSE OF ACTION WHATSOEVER, AND REGARDLESS OF THE FORM OF THE ACTION,
+// WHETHER ARISING IN CONTRACT, TORT OR OTHERWISE, EXCEED THE AMOUNT PAID BY YOU
+// TO US, IF ANY, DURING THE 90 DAY PERIOD IMMEDIATELY PRECEDING THE DATE ON WHICH
+// YOU FIRST ASSERT ANY SUCH CLAIM. THE FOREGOING LIMITATIONS SHALL APPLY TO THE
+// FULLEST EXTENT PERMITTED BY APPLICABLE LAW.
+//
+// 6515C - Analogue Pocket main unit
+// SOCRATES FPGA
+//
+// 2022-08-17 Analogue
+
+
+File: core/platform/pocket/bsp/pocket/sys_assign.tcl
+# ==============================================================================
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileType: SOURCE
+# SPDX-FileCopyrightText: (c) 2022, OpenGateware authors and contributors
+# ==============================================================================
+# 
+# Platform Global/Location/Instance Assignments
+# 
+# ==============================================================================
+# Hardware Information
+# ==============================================================================
+
+File: core/platform/pocket/bsp/setup.tcl
+# ==============================================================================
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileType: SOURCE
+# SPDX-FileCopyrightText: (c) 2022, OpenGateware authors and contributors
+# ==============================================================================
+
+# ==============================================================================
+# Parameters Assignments
+# ==============================================================================
+
+File: core/platform/pocket/helpers/synch_2.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// 2-stage synchronizer
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+// Copyright (c) 2022, Analogue Enterprises Limited
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+// This creates a pipeline where each signal holds the value of the signal that
+// was one clock cycle earlier.
+//
+// It effectively delays the 'i' input by two clock cycles and propagates it
+// to the 'o' output.
+//
+// Useful for tasks such as synchronizing data or creating a 2-stage pipeline
+// register.
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/helpers/synch_3.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// 3-stage synchronizer
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+// Copyright (c) 2022, Analogue Enterprises Limited
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+// This creates a pipeline where each signal holds the value of the signal that
+// was one clock cycle earlier.
+//
+// It effectively delays the 'i' input by three clock cycles and propagates it
+// to the 'o' output.
+//
+// Useful for tasks such as synchronizing data or creating a 3-stage pipeline
+// register.
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/analog2dpad.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket Analogue Joystick to DPAD Controller
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+//    Uy    |        0x00
+// Lx ++ Rx | 0x00 > 0x80 < 0xFF
+//    Dy    |        0xFF
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/data_loader.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket Data Loader
+//
+// Copyright (c) 2022, Adam Gastineau
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+// Data loader: Takes APF bridge writes, sends them to storage.
+//
+// Takes 32-bit words from APF and splits them into four / OUTPUT_WORD_SIZE words.
+// You can set the cycle delay by adjusting WRITE_MEM_CLOCK_DELAY.
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/data_unloader.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket Data Unloader
+//
+// Copyright (c) 2022, Adam Gastineau
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+// Data unloader: Reads from memory, supplies to APF bridge.
+//
+// Takes four words (bytes or 16-bit words) and sends them as 32-bit words to APF.
+// You can set the cycle delay by adjusting READ_MEM_CLOCK_DELAY.
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/gamepad.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket PAD Controller
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+// Shifts the joystick input signal through two stages of registers,
+// synchronizing it to the system clock signal, and outputs the synchronized
+// joystick outputs
+//
+// key bitmap:
+//   [0] dpad_up    | [ 8] trig_l1
+//   [1] dpad_down  | [ 9] trig_r1
+//   [2] dpad_left  | [10] trig_l2
+//   [3] dpad_right | [11] trig_r2
+//   [4] face_a     | [12] trig_l3
+//   [5] face_b     | [13] trig_r3
+//   [6] face_x     | [14] face_select
+//   [7] face_y     | [15] face_start
+//   [28:16] <unused>
+//   [31:29] type
+//
+// joy values - unsigned - 0x00 > 0x80 < 0xFF
+//     [7:0] lstick_x
+//    [15:8] lstick_y
+//   [23:16] rstick_x
+//   [31:24] rstick_y
+//
+// trigger values - unsigned - 0x00-0xFF
+//    [7:0] ltrig
+//   [15:8] rtrig
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/interact.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket Interact Controller for APF bridge
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/joypad.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket Gamepad Controller
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+// Shift joystick interface through 3-stages of registers and output the
+// synchronized signal
+//
+// The value of cont_key is transferred to pkey_s1.
+// The value of pkey_s1 (from the previous clock cycle) is transferred to pkey_s2.
+// The value of pkey_s2 (from two clock cycles ago) is transferred to pkey_s,
+// which is in the target clock domain.
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/keyboard/apf2hid.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket USB HID Keyboard/Mouse and PS/2 Scan Code Translation
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/keyboard/hid2ps2_key.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket USB HID Keyboard/Mouse and PS/2 Scan Code Translation
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/keyboard/hid2ps2_mod.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket USB HID Keyboard/Mouse and PS/2 Scan Code Translation
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/keyboard/kb_fifo.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket USB HID Keyboard/Mouse and PS/2 Scan Code Translation
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/keyboard/key_arbiter.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket USB HID Keyboard/Mouse and PS/2 Scan Code Translation
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/keyboard/key_ctl.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket USB HID Keyboard/Mouse and PS/2 Scan Code Translation
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+// Copyright (c) 2023, Jacob Boline <mail@jboline.me>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/keyboard/key_mgr.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket USB HID Keyboard/Mouse and PS/2 Scan Code Translation
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+// Copyright (c) 2023, Jacob Boline <mail@jboline.me>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/keyboard/usb_keyboard.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket USB HID Keyboard/Mouse and PS/2 Scan Code Translation
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/mame_keymap.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// PS/2 Keyboard to MAME Key Mapping
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+//
+// key bitmap:
+//
+// | Gamepad   | Start       | Coinage    |
+// | --------- | ----------- | ---------- |
+// | [0] up    | [0] start 1 | [0] coin 1 |
+// | [1] down  | [1] start 2 | [1] coin 2 |
+// | [2] left  | [2] start 3 | [2] coin 3 |
+// | [3] right | [3] start 4 | [3] coin 4 |
+// | [4] btn_1 |             |            |
+// | [5] btn_2 |             |            |
+// | [6] btn_3 |             |            |
+// | [7] btn_4 |             |            |
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/mame_keymap_f.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// PS/2 Keyboard to MAME Key Mapping
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+//
+// key bitmap:
+//
+// | Gamepad   | Start       | Coinage    |
+// | --------- | ----------- | ---------- |
+// | [0] up    | [0] start 1 | [0] coin 1 |
+// | [1] down  | [1] start 2 | [1] coin 2 |
+// | [2] left  | [2] start 3 | [2] coin 3 |
+// | [3] right | [3] start 4 | [3] coin 4 |
+// | [4] btn_1 |             |            |
+// | [5] btn_2 |             |            |
+// | [6] btn_3 |             |            |
+// | [7] btn_4 |             |            |
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/pause_crtl.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket Generic Pause Handling
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/interface/usb_mouse.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket USB HID Keyboard/Mouse and PS/2 Scan Code Translation
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+// Analogue Pocket Dock USB Notes:
+//
+// Mouse:
+// Because mouse input data is report/event based (using deltas instead of
+// absolute coordinates), a 16-bit counter is used to identify each unique
+// report, and incremented each time a new report is sent.
+// A comparator can be used against the current and previous counter value
+// to detect new events.
+// 
+// In the mouse data are X position delta, Y position delta,
+// up to 8 buttons, and the report counter.
+// Buttons, starting at bit 0 with left, right, middle, etc.
+//
+// | Register bit range | Function                 |
+// | :----------------- | :----------------------- |
+// | cont4_joy[31:16]   | Buttons                  |
+// | cont4_joy[15:0]    | Relative X movement (LE) |
+// | cont4_key[15:0]    | Report counter (LE)      |
+// | cont4_trig[15:0]   | Relative Y movement (LE) |
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/megafunctions/mf_datatable.v
+// megafunction wizard: %RAM: 2-PORT%
+// GENERATION: STANDARD
+// VERSION: WM1.0
+// MODULE: altsyncram 
+
+// ============================================================
+// File Name: mf_datatable.v
+// Megafunction Name(s):
+// 			altsyncram
+//
+// Simulation Library Files(s):
+// 			altera_mf
+// ============================================================
+// ************************************************************
+// THIS IS A WIZARD-GENERATED FILE. DO NOT EDIT THIS FILE!
+//
+// 17.1.0 Build 590 10/25/2017 SJ Standard Edition
+// ************************************************************
+
+
+//Copyright (C) 2017  Intel Corporation. All rights reserved.
+//Your use of Intel Corporation's design tools, logic functions 
+//and other software and tools, and its AMPP partner logic 
+//functions, and any output files from any of the foregoing 
+//(including device programming or simulation files), and any 
+//associated documentation or information are expressly subject 
+//to the terms and conditions of the Intel Program License 
+//Subscription Agreement, the Intel Quartus Prime License Agreement,
+//the Intel FPGA IP License Agreement, or other applicable license
+//agreement, including, without limitation, that your use is for
+//the sole purpose of programming logic devices manufactured by
+//Intel and sold by Intel or its authorized distributors.  Please
+//refer to the applicable agreement for further details.
+
+
+// synopsys translate_off
+
+File: core/platform/pocket/megafunctions/mf_ddio_bidir_12.v
+// megafunction wizard: %ALTDDIO_BIDIR%
+// GENERATION: STANDARD
+// VERSION: WM1.0
+// MODULE: ALTDDIO_BIDIR 
+
+// ============================================================
+// File Name: mf_ddio_bidir_12.v
+// Megafunction Name(s):
+// 			ALTDDIO_BIDIR
+//
+// Simulation Library Files(s):
+// 			altera_mf
+// ============================================================
+// ************************************************************
+// THIS IS A WIZARD-GENERATED FILE. DO NOT EDIT THIS FILE!
+//
+// 18.1.1 Build 646 04/11/2019 SJ Lite Edition
+// ************************************************************
+
+
+//Copyright (C) 2019  Intel Corporation. All rights reserved.
+//Your use of Intel Corporation's design tools, logic functions 
+//and other software and tools, and any partner logic 
+//functions, and any output files from any of the foregoing 
+//(including device programming or simulation files), and any 
+//associated documentation or information are expressly subject 
+//to the terms and conditions of the Intel Program License 
+//Subscription Agreement, the Intel Quartus Prime License Agreement,
+//the Intel FPGA IP License Agreement, or other applicable license
+//agreement, including, without limitation, that your use is for
+//the sole purpose of programming logic devices manufactured by
+//Intel and sold by Intel or its authorized distributors.  Please
+//refer to the applicable agreement for further details, at
+//https://fpgasoftware.intel.com/eula.
+
+
+// synopsys translate_off
+
+File: core/platform/pocket/memory/dpram_hs.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Generic Simple Dual-Port RAM (Single Clock)
+//
+// Copyright (c) 2022, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/memory/spram_hs.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Generic Simple Single-Port RAM (Single Clock)
+//
+// Copyright (c) 2022, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/memory/sram.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Async SRAM Controller
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/peripherals/core_bridge_cmd.sv
+// Software License Agreement
+
+// The software supplied herewith by Analogue Enterprises Limited (the "Company”),
+// the Analogue Pocket Framework (“APF”), is provided and licensed to you, the
+// Company's customer, solely for use in designing, testing and creating
+// applications for use with Company's Products or Services.  The software is
+// owned by the Company and/or its licensors, and is protected under applicable
+// laws, including, but not limited to, U.S. copyright law. All rights are
+// reserved. By using the APF code you are agreeing to the terms of the End User
+// License Agreement (“EULA”) located at [https://www.analogue.link/pocket-eula]
+// and incorporated herein by reference. To the extent any use of the APF requires
+// application of the MIT License or the GNU General Public License and terms of
+// this APF Software License Agreement and EULA are inconsistent with such license,
+// the applicable terms of the MIT License or the GNU General Public License, as
+// applicable, will prevail.
+
+// THE SOFTWARE IS PROVIDED "AS-IS" AND WE EXPRESSLY DISCLAIM ANY IMPLIED
+// WARRANTIES TO THE FULLEST EXTENT PROVIDED BY LAW, INCLUDING BUT NOT LIMITED TO,
+// ANY WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE OR
+// NON-INFRINGEMENT. TO THE EXTENT APPLICABLE LAWS PROHIBIT TERMS OF USE FROM
+// DISCLAIMING ANY IMPLIED WARRANTY, SUCH IMPLIED WARRANTY SHALL BE LIMITED TO THE
+// MINIMUM WARRANTY PERIOD REQUIRED BY LAW, AND IF NO SUCH PERIOD IS REQUIRED,
+// THEN THIRTY (30) DAYS FROM FIRST USE OF THE SOFTWARE. WE CANNOT GUARANTEE AND
+// DO NOT PROMISE ANY SPECIFIC RESULTS FROM USE OF THE SOFTWARE. WITHOUT LIMITING
+// THE FOREGOING, WE DO NOT WARRANT THAT THE SOFTWARE WILL BE UNINTERRUPTED OR
+// ERROR-FREE.  IN NO EVENT WILL WE BE LIABLE TO YOU OR ANY OTHER PERSON FOR ANY
+// INDIRECT, CONSEQUENTIAL, EXEMPLARY, INCIDENTAL, SPECIAL OR PUNITIVE DAMAGES,
+// INCLUDING BUT NOT LIMITED TO, LOST PROFITS ARISING OUT OF YOUR USE, OR
+// INABILITY TO USE, THE SOFTWARE, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY
+// OF SUCH DAMAGES. UNDER NO CIRCUMSTANCES SHALL OUR LIABILITY TO YOU FOR ANY
+// CLAIM OR CAUSE OF ACTION WHATSOEVER, AND REGARDLESS OF THE FORM OF THE ACTION,
+// WHETHER ARISING IN CONTRACT, TORT OR OTHERWISE, EXCEED THE AMOUNT PAID BY YOU
+// TO US, IF ANY, DURING THE 90 DAY PERIOD IMMEDIATELY PRECEDING THE DATE ON WHICH
+// YOU FIRST ASSERT ANY SUCH CLAIM. THE FOREGOING LIMITATIONS SHALL APPLY TO THE
+// FULLEST EXTENT PERMITTED BY APPLICABLE LAW.
+//
+// bridge host/target command handler
+// 2022 Analogue
+//
+
+// mapped to 0xF8xxxxxx on bridge
+// the spec is loose enough to allow implementation with either
+// block rams and a soft CPU, or simply hard logic with some case statements.
+//
+// the implementation spec is documented, and depending on your application you
+// may want to completely replace this module. this is only one of many
+// possible ways to accomplish the host/target command system and data table.
+//
+// this module should always be clocked by a direct clock input and never a PLL,
+// because it should report PLL lock status
+//
+
+
+File: core/platform/pocket/peripherals/io_bridge_peripheral.sv
+// Software License Agreement
+
+// The software supplied herewith by Analogue Enterprises Limited (the "Company”),
+// the Analogue Pocket Framework (“APF”), is provided and licensed to you, the
+// Company's customer, solely for use in designing, testing and creating
+// applications for use with Company's Products or Services.  The software is
+// owned by the Company and/or its licensors, and is protected under applicable
+// laws, including, but not limited to, U.S. copyright law. All rights are
+// reserved. By using the APF code you are agreeing to the terms of the End User
+// License Agreement (“EULA”) located at [https://www.analogue.link/pocket-eula]
+// and incorporated herein by reference. To the extent any use of the APF requires
+// application of the MIT License or the GNU General Public License and terms of
+// this APF Software License Agreement and EULA are inconsistent with such license,
+// the applicable terms of the MIT License or the GNU General Public License, as
+// applicable, will prevail.
+
+// THE SOFTWARE IS PROVIDED "AS-IS" AND WE EXPRESSLY DISCLAIM ANY IMPLIED
+// WARRANTIES TO THE FULLEST EXTENT PROVIDED BY LAW, INCLUDING BUT NOT LIMITED TO,
+// ANY WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE OR
+// NON-INFRINGEMENT. TO THE EXTENT APPLICABLE LAWS PROHIBIT TERMS OF USE FROM
+// DISCLAIMING ANY IMPLIED WARRANTY, SUCH IMPLIED WARRANTY SHALL BE LIMITED TO THE
+// MINIMUM WARRANTY PERIOD REQUIRED BY LAW, AND IF NO SUCH PERIOD IS REQUIRED,
+// THEN THIRTY (30) DAYS FROM FIRST USE OF THE SOFTWARE. WE CANNOT GUARANTEE AND
+// DO NOT PROMISE ANY SPECIFIC RESULTS FROM USE OF THE SOFTWARE. WITHOUT LIMITING
+// THE FOREGOING, WE DO NOT WARRANT THAT THE SOFTWARE WILL BE UNINTERRUPTED OR
+// ERROR-FREE.  IN NO EVENT WILL WE BE LIABLE TO YOU OR ANY OTHER PERSON FOR ANY
+// INDIRECT, CONSEQUENTIAL, EXEMPLARY, INCIDENTAL, SPECIAL OR PUNITIVE DAMAGES,
+// INCLUDING BUT NOT LIMITED TO, LOST PROFITS ARISING OUT OF YOUR USE, OR
+// INABILITY TO USE, THE SOFTWARE, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY
+// OF SUCH DAMAGES. UNDER NO CIRCUMSTANCES SHALL OUR LIABILITY TO YOU FOR ANY
+// CLAIM OR CAUSE OF ACTION WHATSOEVER, AND REGARDLESS OF THE FORM OF THE ACTION,
+// WHETHER ARISING IN CONTRACT, TORT OR OTHERWISE, EXCEED THE AMOUNT PAID BY YOU
+// TO US, IF ANY, DURING THE 90 DAY PERIOD IMMEDIATELY PRECEDING THE DATE ON WHICH
+// YOU FIRST ASSERT ANY SUCH CLAIM. THE FOREGOING LIMITATIONS SHALL APPLY TO THE
+// FULLEST EXTENT PERMITTED BY APPLICABLE LAW.
+//
+// bridge peripheral for socrates PMP bridge to heraclitus+aristotle
+// 2020-2022 Analogue
+//
+// please note that while writes are immediate,
+// reads are buffered by 1 word. this is necessary to maintain
+// data throughput while reading from slower data sources like
+// sdram.
+// reads should always return the current bus value, and kickstart
+// into the next read immediately. this way, you have the entire
+// next word time to retrieve the data, instead of just a few
+// cycles.
+//
+// the worst-case read/write timing is every 88 cycles @ 74.25mhz
+// which is about 1180ns.
+
+
+File: core/platform/pocket/peripherals/io_pad_controller.sv
+// Software License Agreement
+
+// The software supplied herewith by Analogue Enterprises Limited (the "Company”),
+// the Analogue Pocket Framework (“APF”), is provided and licensed to you, the
+// Company's customer, solely for use in designing, testing and creating
+// applications for use with Company's Products or Services.  The software is
+// owned by the Company and/or its licensors, and is protected under applicable
+// laws, including, but not limited to, U.S. copyright law. All rights are
+// reserved. By using the APF code you are agreeing to the terms of the End User
+// License Agreement (“EULA”) located at [https://www.analogue.link/pocket-eula]
+// and incorporated herein by reference. To the extent any use of the APF requires
+// application of the MIT License or the GNU General Public License and terms of
+// this APF Software License Agreement and EULA are inconsistent with such license,
+// the applicable terms of the MIT License or the GNU General Public License, as
+// applicable, will prevail.
+
+// THE SOFTWARE IS PROVIDED "AS-IS" AND WE EXPRESSLY DISCLAIM ANY IMPLIED
+// WARRANTIES TO THE FULLEST EXTENT PROVIDED BY LAW, INCLUDING BUT NOT LIMITED TO,
+// ANY WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE OR
+// NON-INFRINGEMENT. TO THE EXTENT APPLICABLE LAWS PROHIBIT TERMS OF USE FROM
+// DISCLAIMING ANY IMPLIED WARRANTY, SUCH IMPLIED WARRANTY SHALL BE LIMITED TO THE
+// MINIMUM WARRANTY PERIOD REQUIRED BY LAW, AND IF NO SUCH PERIOD IS REQUIRED,
+// THEN THIRTY (30) DAYS FROM FIRST USE OF THE SOFTWARE. WE CANNOT GUARANTEE AND
+// DO NOT PROMISE ANY SPECIFIC RESULTS FROM USE OF THE SOFTWARE. WITHOUT LIMITING
+// THE FOREGOING, WE DO NOT WARRANT THAT THE SOFTWARE WILL BE UNINTERRUPTED OR
+// ERROR-FREE.  IN NO EVENT WILL WE BE LIABLE TO YOU OR ANY OTHER PERSON FOR ANY
+// INDIRECT, CONSEQUENTIAL, EXEMPLARY, INCIDENTAL, SPECIAL OR PUNITIVE DAMAGES,
+// INCLUDING BUT NOT LIMITED TO, LOST PROFITS ARISING OUT OF YOUR USE, OR
+// INABILITY TO USE, THE SOFTWARE, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY
+// OF SUCH DAMAGES. UNDER NO CIRCUMSTANCES SHALL OUR LIABILITY TO YOU FOR ANY
+// CLAIM OR CAUSE OF ACTION WHATSOEVER, AND REGARDLESS OF THE FORM OF THE ACTION,
+// WHETHER ARISING IN CONTRACT, TORT OR OTHERWISE, EXCEED THE AMOUNT PAID BY YOU
+// TO US, IF ANY, DURING THE 90 DAY PERIOD IMMEDIATELY PRECEDING THE DATE ON WHICH
+// YOU FIRST ASSERT ANY SUCH CLAIM. THE FOREGOING LIMITATIONS SHALL APPLY TO THE
+// FULLEST EXTENT PERMITTED BY APPLICABLE LAW.
+//
+// pad controller
+// 2020-08-17 Analogue
+//
+
+
+File: core/platform/pocket/pkgIndex.tcl
+# ==============================================================================
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileType: SOURCE
+# SPDX-FileCopyrightText: (c) 2022, OpenGateware authors and contributors
+# ==============================================================================
+# @file: pkgIndex.tcl
+# @brief: Collection of TCL Functions for the Framework
+# ==============================================================================
+
+
+File: core/platform/pocket/scripts/functions.tcl
+# ==============================================================================
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileType: SOURCE
+# SPDX-FileCopyrightText: (c) 2022, OpenGateware authors and contributors
+# ==============================================================================
+# @file: functions.tcl
+# @brief: Collection of TCL Functions for the Framework
+# ==============================================================================
+
+File: core/platform/pocket/scripts/post_flow.tcl
+# ==============================================================================
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileType: SOURCE
+# SPDX-FileCopyrightText: (c) 2022, OpenGateware authors and contributors
+# ==============================================================================
+# @file: post-flow.tcl
+# @brief: POST_FLOW_SCRIPT_FILE - Runs after a flow finishes
+# ==============================================================================
+
+
+File: core/platform/pocket/scripts/pre_flow.tcl
+# ==============================================================================
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileType: SOURCE
+# SPDX-FileCopyrightText: (c) 2022, OpenGateware authors and contributors
+# ==============================================================================
+# @file: pre-flow.tcl
+# @brief: PRE_FLOW_SCRIPT_FILE - Runs before a flow starts
+# ==============================================================================
+
+
+File: core/platform/pocket/support/autofire.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Autofire/Turbo Button Controller
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+// This module provides an "autofire" or "turbo" feature typically found in
+// gaming controllers. When enabled, it automatically toggles the state of
+// a button output at a user-defined rate, simulating rapid button presses
+// without the need for manual input.
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/support/data_io.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Generic Data I/O for APF bridge
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/support/hiscore.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// MAME hiscore.dat support for arcade cores.
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+// Copyright (c) 2021, Alan Steremberg
+// Copyright (c) 2021, Jim Gregory
+//
+// This program is free software; you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the Free
+// Software Foundation; either version 3 of the License, or (at your option)
+// any later version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+// more details.
+//
+// You should have received a copy of the GNU General Public License along
+// with this program; if not, write to the Free Software Foundation, Inc.,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+//
+//------------------------------------------------------------------------------
+//
+// Version history:
+// 0001 - 2021-03-06 - First marked release
+// 0002 - 2021-03-06 - Added HS_DUMPFORMAT localparam to identify dump version (for future use)
+//                     Add HS_CONFIGINDEX and HS_DUMPINDEX parameters to configure ioctl_indexes
+// 0003 - 2021-03-10 - Added WRITE_REPEATCOUNT and WRITE_REPEATWAIT to handle tricky write situations
+// 0004 - 2021-03-15 - Fix ram_access assignment
+// 0005 - 2021-03-18 - Add configurable score table width, clean up some stupid mistakes
+// 0006 - 2021-03-27 - Move 'tweakable' parameters into MRA data header
+// 0007 - 2021-04-15 - Improve state machine maintainability, add new 'pause padding' states
+// 0008 - 2021-05-12 - Feed back core-level pause to halt startup timer
+// 0009 - 2021-07-31 - Split hiscore extraction from upload (updates hiscore buffer on OSD open)
+// 0010 - 2021-08-03 - Add hiscore buffer and change detection (ready for autosave!)
+// 0011 - 2021-08-07 - Optional auto-save on OSD open
+// 0012 - 2021-08-17 - Add variable length change detection mask
+// 0013 - 2021-09-01 - Output configured signal for autosave option menu masking
+// 0014 - 2021-09-09 - Fix turning on autosave w/o core reload
+// 0015 - 2023-06-21 - Changes for the Analogue Pocket
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/support/hiscore_io.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket HiScore NVRAM/SRAM I/O Controller for APF bridge
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/support/nvram.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// NVRAM-style hiscore autosave support for arcade cores.
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+// Copyright (c) 2021, Jim Gregory
+//
+// This program is free software; you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the Free
+// Software Foundation; either version 3 of the License, or (at your option)
+// any later version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+// more details.
+//
+// You should have received a copy of the GNU General Public License along
+// with this program; if not, write to the Free Software Foundation, Inc.,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+//
+//------------------------------------------------------------------------------
+//
+// Version history:
+// 0001 - 2021-10-01 - First marked release
+// 0002 - 2021-10-09 - Add change mask support
+// 0003 - 2023-06-21 - Changes for the Analogue Pocket
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/support/save_io.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Analogue Pocket Save I/O Controller for APF bridge
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/video/scanlines.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2022, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Video Scanlines Generator
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, version 3.
+//
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+// General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+//
+//------------------------------------------------------------------------------
+// | Horizontal Lines                 |
+// | Soft     | 25% | 4'b0001 | 4'd1  |
+// | Medium   | 50% | 4'b0010 | 4'd2  |
+// | Hard     | 75% | 4'b0011 | 4'd3  |
+//
+// | Vertical Lines                   |
+// | Soft     | 25% | 4'b0100 | 4'd4  |
+// | Medium   | 50% | 4'b1000 | 4'd8  |
+// | Hard     | 75% | 4'b1100 | 4'd12 |
+//
+// | Horizontal and Vertical Lines    |
+// | Soft     | 25% | 4'b0101 | 4'd5  |
+// | Medium   | 50% | 4'b1010 | 4'd10 |
+// | Hard     | 75% | 4'b1111 | 4'd15 |
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/video/scanlines_generator.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2022, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Generic Video Scanlines
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+// Copyright (c) 2017, Alexey Melnikov <pour.garbage@gmail.com>
+// Copyright (c) 2015, Till Harbaum <till@harbaum.org>
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, version 3.
+//
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+// General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/video/shadowmask.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Video Shadow Mask
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+// Copyright (c) 2020, Alexey Melnikov <pour.garbage@gmail.com>
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, version 3.
+//
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+// General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+//
+//------------------------------------------------------------------------------
+
+
+File: core/platform/pocket/video/video_mixer.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+// Generic Video Interface for the Analogue Pocket Display
+//
+// Note: APF scaler requires HSync and VSync to last for a single clock, and
+// video_rgb to be 0 when video_de is low
+//
+// RGB palettes
+//
+// | RGB Format | Bit Depth | Number of Colors |
+// | ---------- | --------- | ---------------- |
+// | RGB111     | 3 bits    | 8                |
+// | RGB222     | 6 bits    | 64               |
+// | RGB233     | 8 bits    | 256              |
+// | RGB332     | 8 bits    | 256              |
+// | RGB333     | 9 bits    | 512              |
+// | RGB444     | 12 bits   | 4,096            |
+// | RGB555     | 15 bits   | 32,768           |
+// | RGB565     | 16 bits   | 65,536           |
+// | RGB666     | 18 bits   | 262,144          |
+// | RGB888     | 24 bits   | 16,777,216       |
+//
+//------------------------------------------------------------------------------
+
+
+File: core/rtl/k054000.sv
+// SPDX-License-Identifier: BSD-3-Clause
+// Arithmetic behavior follows MAME k054000.cpp (BSD-3-Clause),
+// copyright holders David Haywood and Angelo Salese. See
+// docs/BUCKY_INTEGRATION.md for the exact source pin and boundary choices.
+// Standalone prerequisite; not connected to the Moo-only machine yet.
+
+File: core/target/pocket/core_top.sv
+//------------------------------------------------------------------------------
+// SPDX-License-Identifier: MIT
+// SPDX-FileType: SOURCE
+// SPDX-FileCopyrightText: (c) 2023, OpenGateware authors and contributors
+//------------------------------------------------------------------------------
+//
+// Copyright (c) 2023, Marcus Andrade <marcus@opengateware.org>
+// Copyright (c) 2022, Analogue Enterprises Limited
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//------------------------------------------------------------------------------
+// Platform Specific top-level -- Cowboys of Moo Mesa
+// Instantiated by the real top-level: apf_top
+//
+// The machine (rtl/moomesa_core.sv) is platform-agnostic; this file is the APF
+// glue: bridge, the ROM slot, the interact menu, video and audio hand-off, the
+// memories, and the bring-up panel.  The ROM image lives in SDRAM and the
+// tilemap RAM in the SRAM (target/pocket/moomesa_mem.sv).
+//
+// Everything above the "@ The game" banner is the framework's and is the same
+// in every core here.  Below it, the shapes are proven on hardware -- the
+// reset chain, the SRAM self-test, the pause, the clock-domain hand-overs --
+// and the contents are yours.  Read METHODOLOGY.md sections 5.4, 5.5, 5.8 and
+// 5.16 to 5.21 before changing a shape.
+//------------------------------------------------------------------------------

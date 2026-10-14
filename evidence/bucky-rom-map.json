@@ -1,0 +1,201 @@
+{
+  "set": "bucky",
+  "revision": "World EAB",
+  "identity_status": "14 private World EAB member identities and independent region mapping passed; see bucky-rom-identity.json",
+  "source": {
+    "path": "core/ref/mame/moo.cpp",
+    "sha256": "2b3b28a1353a65058018baa3a8f8b869e9513fa8ef3e4369e9885ed8135b7beb",
+    "mame_commit": "2c38dc6e555e17560bbf6f5531c3e86cf8570f54",
+    "url": "https://github.com/mamedev/mame/blob/2c38dc6e555e17560bbf6f5531c3e86cf8570f54/src/mame/konami/moo.cpp"
+  },
+  "image_size": 15990912,
+  "fill": 255,
+  "regions": [
+    {
+      "name": "maincpu",
+      "offset": 14680064,
+      "size": 1048576
+    },
+    {
+      "name": "soundcpu",
+      "offset": 15728640,
+      "size": 262144
+    },
+    {
+      "name": "k056832",
+      "offset": 8388608,
+      "size": 2097152
+    },
+    {
+      "name": "k053246",
+      "offset": 0,
+      "size": 8388608
+    },
+    {
+      "name": "k054539",
+      "offset": 10485760,
+      "size": 4194304
+    },
+    {
+      "name": "eeprom",
+      "offset": 15990784,
+      "size": 128
+    }
+  ],
+  "members": [
+    {
+      "name": "173eab01.q5",
+      "region": "maincpu",
+      "mame_offset": 0,
+      "image_offset": 14680064,
+      "size": 262144,
+      "stride": 2,
+      "unit": 1,
+      "crc32": "7785ac8a",
+      "sha1": "ef78d14f54d3a0b724b9702a18c67891e2d366a7"
+    },
+    {
+      "name": "173eab02.q6",
+      "region": "maincpu",
+      "mame_offset": 1,
+      "image_offset": 14680065,
+      "size": 262144,
+      "stride": 2,
+      "unit": 1,
+      "crc32": "9b45f122",
+      "sha1": "325af1612e6f90ef9ae9353c43dc645be1f3465c"
+    },
+    {
+      "name": "173a03.t5",
+      "region": "maincpu",
+      "mame_offset": 2097152,
+      "image_offset": 15204352,
+      "size": 131072,
+      "stride": 2,
+      "unit": 1,
+      "crc32": "cd724026",
+      "sha1": "525445499604b713da4d8bc0a88e428654ceab95"
+    },
+    {
+      "name": "173a04.t6",
+      "region": "maincpu",
+      "mame_offset": 2097153,
+      "image_offset": 15204353,
+      "size": 131072,
+      "stride": 2,
+      "unit": 1,
+      "crc32": "7dd54d6f",
+      "sha1": "b0ee8ec445b92254bca881eefd4449972fed506a"
+    },
+    {
+      "name": "173a07.f5",
+      "region": "soundcpu",
+      "mame_offset": 0,
+      "image_offset": 15728640,
+      "size": 262144,
+      "stride": 1,
+      "unit": 1,
+      "crc32": "4cdaee71",
+      "sha1": "bdc05d4475415f6fac65d7cdbc48df398e57845e"
+    },
+    {
+      "name": "173a05.t8",
+      "region": "k056832",
+      "mame_offset": 0,
+      "image_offset": 8388608,
+      "size": 1048576,
+      "stride": 4,
+      "unit": 2,
+      "crc32": "d14333b4",
+      "sha1": "d1a15ead2d156e1fceca0bf202ab3962411caf11"
+    },
+    {
+      "name": "173a06.t10",
+      "region": "k056832",
+      "mame_offset": 2,
+      "image_offset": 8388610,
+      "size": 1048576,
+      "stride": 4,
+      "unit": 2,
+      "crc32": "6541a34f",
+      "sha1": "15cf481498e3b7e0b2f7bfe5434121cc3bd65662"
+    },
+    {
+      "name": "173a10.b8",
+      "region": "k053246",
+      "mame_offset": 0,
+      "image_offset": 0,
+      "size": 2097152,
+      "stride": 8,
+      "unit": 2,
+      "crc32": "42fb0a0c",
+      "sha1": "d68c932cfabdec7896698b433525fe47ef4698d0"
+    },
+    {
+      "name": "173a11.a8",
+      "region": "k053246",
+      "mame_offset": 2,
+      "image_offset": 2,
+      "size": 2097152,
+      "stride": 8,
+      "unit": 2,
+      "crc32": "b0d747c4",
+      "sha1": "0cf1ee1b9a35ded31a81c321df2a076f7b588971"
+    },
+    {
+      "name": "173a12.b10",
+      "region": "k053246",
+      "mame_offset": 4,
+      "image_offset": 4,
+      "size": 2097152,
+      "stride": 8,
+      "unit": 2,
+      "crc32": "0fc2ad24",
+      "sha1": "6eda1043ee1266b8ba938a03a90bc7787210a936"
+    },
+    {
+      "name": "173a13.a10",
+      "region": "k053246",
+      "mame_offset": 6,
+      "image_offset": 6,
+      "size": 2097152,
+      "stride": 8,
+      "unit": 2,
+      "crc32": "4cf85439",
+      "sha1": "8c298bf0e659a830a1830a1180f4ce71215ade45"
+    },
+    {
+      "name": "173a08.b6",
+      "region": "k054539",
+      "mame_offset": 0,
+      "image_offset": 10485760,
+      "size": 2097152,
+      "stride": 1,
+      "unit": 1,
+      "crc32": "dcdded95",
+      "sha1": "8eeb546a0b60a35a6dce36c5ee872e6c93c577c9"
+    },
+    {
+      "name": "173a09.a6",
+      "region": "k054539",
+      "mame_offset": 2097152,
+      "image_offset": 12582912,
+      "size": 2097152,
+      "stride": 1,
+      "unit": 1,
+      "crc32": "c93697c4",
+      "sha1": "0528a604868267a30d281b822c187df118566691"
+    },
+    {
+      "name": "bucky.nv",
+      "region": "eeprom",
+      "mame_offset": 0,
+      "image_offset": 15990784,
+      "size": 128,
+      "stride": 1,
+      "unit": 1,
+      "crc32": "6a5986f3",
+      "sha1": "3efddeed261b09031c582e12318f00c2cbb214ea"
+    }
+  ]
+}

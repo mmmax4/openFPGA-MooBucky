@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<misterromdescription>
+    <name>Bucky O'Hare (World ver EAB)</name>
+    <setname>bucky</setname>
+    <rbf>moomesa</rbf>
+    <mameversion>0288</mameversion>
+    <region>World</region>
+    <rom index="0" zip="bucky.zip" md5="2fb22d2142119dfd04582d442153db78">
+        <!--World EAB recipe; verified private archive and independent lane reconstruction. Requires Bucky-aware bitstream. Sprites 000000, tiles 800000, samples A00000, main E00000, Z80 F00000, EEPROM F40000.-->
+        <interleave output="64">
+            <part name="173a10.b8" crc="42fb0a0c" map="00000021"/>
+            <part name="173a11.a8" crc="b0d747c4" map="00002100"/>
+            <part name="173a12.b10" crc="0fc2ad24" map="00210000"/>
+            <part name="173a13.a10" crc="4cf85439" map="21000000"/>
+        </interleave>
+        <interleave output="32">
+            <part name="173a05.t8" crc="d14333b4" map="0021"/>
+            <part name="173a06.t10" crc="6541a34f" map="2100"/>
+        </interleave>
+        <part name="173a08.b6" crc="dcdded95"/>
+        <part name="173a09.a6" crc="c93697c4"/>
+        <interleave output="16">
+            <part name="173eab01.q5" crc="7785ac8a" map="01"/>
+            <part name="173eab02.q6" crc="9b45f122" map="10"/>
+        </interleave>
+        <interleave output="16">
+            <part name="173a03.t5" crc="cd724026" map="01"/>
+            <part name="173a04.t6" crc="7dd54d6f" map="10"/>
+        </interleave>
+        <part repeat="262144">FF</part>
+        <part name="173a07.f5" crc="4cdaee71"/>
+        <part name="bucky.nv" crc="6a5986f3"/>
+    </rom>
+</misterromdescription>

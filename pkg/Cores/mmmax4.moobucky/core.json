@@ -1,0 +1,36 @@
+{
+  "core": {
+    "magic": "APF_VER_1",
+    "metadata": {
+      "platform_ids": [
+        "moobucky"
+      ],
+      "shortname": "moobucky",
+      "description": "Moo Mesa / Bucky O'Hare World EAB",
+      "author": "mmmax4",
+      "url": "https://github.com/mmmax4/openFPGA-MooBucky",
+      "version": "0.3.0",
+      "date_release": "2026-10-14"
+    },
+    "framework": {
+      "target_product": "Analogue Pocket",
+      "version_required": "2.0",
+      "sleep_supported": false,
+      "dock": {
+        "supported": true,
+        "analog_output": false
+      },
+      "hardware": {
+        "link_port": false,
+        "cartridge_adapter": -1
+      }
+    },
+    "cores": [
+      {
+        "name": "default",
+        "id": 0,
+        "filename": "bitstream.rbf_r"
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+/private/
+/build/
+*.rom
+*.sav
+*.nv
+*.zip
+*.rbf
+*.rbf_r
+*.sof
+*.vcd
+*.fst
+**/__pycache__/
+/core/projects/db/
+/core/projects/incremental_db/
+/core/projects/output_files/
+/core/projects/*.qws
+/core/projects/*_assignment_defaults.qdf

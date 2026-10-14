@@ -1,0 +1,636 @@
+//------------------------------------------------------------------------------
+// K053246/K053247 sprites (docs/hardware.md 7.4; the reference is
+// tools/moo_render.py draw_sprites and blit).
+//
+// Three jobs:
+//
+//   DMA   at vblank, when K053246 reg 5 bit 4 is set: walk the 256 sprite-RAM
+//         entries at a 0x80-word stride, copy each active one (word 0 bit 15)
+//         into the chip's list, packed to the front, and clear word 0 of the
+//         rest (moo.cpp object_dma).  `dma_done` pulses at the end.
+//   SORT  after the DMA (or at vblank if there was none): MAME's exchange
+//         sort of the active entries by z-code, done literally, because the
+//         order it leaves equal z-codes in decides which sprite claims a
+//         pixel.  Drawing is from the end of that list (nearest first).
+//   LINE  on `start`, draw every sprite that crosses bitmap line `line` into
+//         the line buffer half `buf_sel`: cell rows fetched through the sprite
+//         port, stretched with MAME's drawgfxzoom stepping, and written with
+//         PIXEL_OP_REMAP_TRANSTABLE32_PRIORITY's rule -- the first opaque pen
+//         claims the pixel whether or not it will show; a shadow pen marks an
+//         unclaimed, unshadowed pixel.  Whether each shows is the mixer's
+//         decision (it knows the layers under it).
+//
+// The line buffer is two block RAMs.  Flags {claimed, shadowed, shadow preset,
+// shadow class}: the engine reads a pixel's a clock before it writes it
+// (forwarding either of the two writes before when it is the same pixel), so
+// a pixel still goes in every clock.  Data {claimed, palette index[10:0], class[1:0],
+// shadowed, preset[1:0], class[1:0]}: written whole by the engine from the
+// flags, read by the mixer.  (Flags as flops -- four 512-bit arrays behind
+// 512-way decodes -- came to 9,100 ALMs, half the device: METHODOLOGY 5.18.)
+// The engine clears its half at the start of each line, 384 clocks, while it
+// starts on the list: nothing is drawn until the clear is done.
+//
+// The line engine is two machines and a queue.  The front end walks the
+// sorted list, decides which cell rows cross the line, fetches each one and
+// queues it with its geometry; the back end draws queued cells a pixel a
+// clock.  So a cell costs about the longer of its fetch and its pixels, not
+// their sum, and the list walk hides behind the drawing (on the Pocket the
+// fetch waits its turn at the burst port behind the tiles and both CPUs).
+//
+// A line not finished when the next one starts is abandoned at the first
+// point with no fetch in flight, and the new line started: an overloaded line
+// loses its farthest sprites -- drawing is nearest first -- instead of the
+// next line losing all of them (which showed as every other line missing).
+//   class: which sorted layers hide it (0: none .. 3: all three)
+//
+// Deviation from MAME, on a path the game was never seen to use (no shadow in
+// 20 minutes of census): MAME skips a shadow pen whose priority mask fails and
+// lets a farther shadow sprite shade the pixel instead; here the first shadow
+// pen always marks it and the mask is applied at mix time.
+//------------------------------------------------------------------------------
+`default_nettype none
+
+module moo_sprites (
+    input  logic        clk,
+    input  logic        rst,
+    input  logic        bucky,
+
+    // K053246 registers, byte-wide (0C2000-0C2007)
+    input  logic        reg_we,
+    input  logic  [2:0] reg_addr,
+    input  logic  [7:0] reg_d,
+    output logic  [7:0] k246 [8],
+
+    // from the K053251 (static in this game, but read live)
+    input  logic  [6:0] colorbase,      // CI0 palette base, in 16-colour units
+    input  logic  [5:0] lp0, lp1, lp2,  // sorted layer priorities, back to front
+
+    input  logic        vblank_start,   // pulse
+    output logic        dma_done,       // pulse, end of an object DMA
+    output logic        dma_busy,
+
+    // sprite RAM, second port (CPU view, 32K words), one clock latency
+    output logic [14:0] sr_addr,
+    input  logic [15:0] sr_q,
+
+    // line engine
+    input  logic        start,
+    input  logic  [8:0] line,
+    input  logic        buf_sel,
+    output logic        busy,
+
+    // sprite ROM rows
+    output logic        rom_req,
+    output logic [19:0] rom_addr,
+    input  logic        rom_ack,
+    input  logic [63:0] rom_q,
+
+    // mixer read port: half `mx_buf`, bitmap x `mx_x`; data one clock later
+    input  logic        mx_buf,
+    input  logic  [8:0] mx_x,
+    output logic        mx_claim,
+    output logic [12:0] mx_cdata,
+    output logic        mx_shadow,
+    output logic  [3:0] mx_sdata,       // (all four one clock after mx_x)
+
+    // bench back door into the list (word address {entry, word})
+    input  logic        dbg_we,
+    input  logic [10:0] dbg_addr,
+    input  logic [15:0] dbg_d,
+    input  logic        dbg_sort,       // pulse: sort without a DMA
+
+    // statistics
+    output logic [15:0] worst_line,     // most clocks a line took, saturating
+    output logic        missed          // a line was not finished in time (sticky)
+);
+    // ------------------------------------------------------------ registers
+    always_ff @(posedge clk) begin
+        if (rst) for (int i = 0; i < 8; i++) k246[i] <= 8'd0;
+        else if (reg_we) k246[reg_addr] <= reg_d;
+    end
+
+    // ------------------------------------------------------------ list RAM
+    // eight banks of 256 x 16, one per word of an entry, read all at once
+    logic [15:0] lst [8][256];
+    logic  [7:0] l_raddr;
+    logic [15:0] l_q [8];
+    logic        l_we;
+    logic  [2:0] l_wbank;
+    logic  [7:0] l_waddr;
+    logic [15:0] l_wd;
+    always_ff @(posedge clk) begin
+        for (int b = 0; b < 8; b++) begin
+            l_q[b] <= lst[b][l_raddr];
+            if (dbg_we && dbg_addr[2:0] == 3'(b)) lst[b][dbg_addr[10:3]] <= dbg_d;
+            else if (l_we && l_wbank == 3'(b)) lst[b][l_waddr] <= l_wd;
+        end
+    end
+
+    // sorted list: {entry, z}
+    logic [15:0] srt [256];
+    logic  [7:0] s_raddr, s_waddr;
+    logic [15:0] s_q, s_wd;
+    logic        s_we;
+    always_ff @(posedge clk) begin
+        s_q <= srt[s_raddr];
+        if (s_we) srt[s_waddr] <= s_wd;
+    end
+
+    // ------------------------------------------------------------ tables
+    // zoom = (0x400000 + z/2) / z, 0x800000 for z = 0 (draw_single_sprite_gxcore)
+    logic [23:0] ztab [1024];
+    // 16.16 source step for a destination size w: (16 << 16) / w (drawgfxzoom_core)
+    logic [20:0] rtab [2048];
+    initial begin
+        ztab[0] = 24'h800000;
+        for (int z = 1; z < 1024; z++) ztab[z] = 24'((32'h400000 + (z >> 1)) / z);
+        rtab[0] = 21'd0;
+        for (int w = 1; w < 2048; w++) rtab[w] = 21'((32'd16 << 16) / w);
+    end
+    logic  [9:0] z_a0, z_a1;
+    logic [23:0] z_q0, z_q1;
+    logic [10:0] r_a;
+    logic [20:0] r_q;
+    // rtab's answer is registered twice: it feeds a multiplier, and straight
+    // out of the RAM that was the video's slowest path
+    logic [20:0] r_q0;
+    always_ff @(posedge clk) begin
+        z_q0 <= ztab[z_a0];
+        z_q1 <= ztab[z_a1];
+        r_q0 <= rtab[r_a];
+        r_q  <= r_q0;
+    end
+
+    // ------------------------------------------------------------ DMA and sort
+    typedef enum logic [3:0] {
+        V_IDLE, V_DMA_RD, V_DMA_W0, V_DMA_CP, V_DMA_CLR,
+        V_SCAN, V_SCANW, V_SCANC, V_SO_Y, V_SO_YW, V_SO_YQ, V_SO_X, V_SO_XW, V_SO_XC, V_SO_WY
+    } vst_t;
+    vst_t vs;
+    logic  [7:0] v_lraddr, v_sraddr, e_lraddr, e_sraddr;
+    assign l_raddr = (vs != V_IDLE) ? v_lraddr : e_lraddr;
+    assign s_raddr = (vs != V_IDLE) ? v_sraddr : e_sraddr;
+    logic  [8:0] d_src, d_dst;          // 0..256
+    logic  [3:0] d_w;
+    logic  [8:0] n_act;                 // active entries in the sorted list
+    logic  [8:0] so_y, so_x, sc_i;
+    logic [15:0] so_cur;                // {entry, z} held for position y
+
+    assign dma_busy = (vs != V_IDLE);
+
+    always_ff @(posedge clk) begin
+        l_we     <= 1'b0;
+        s_we     <= 1'b0;
+        dma_done <= 1'b0;
+        case (vs)
+            V_IDLE: begin
+                if (vblank_start && k246[5][4]) begin d_src <= 9'd0; d_dst <= 9'd0; vs <= V_DMA_RD; end
+                else if (vblank_start || dbg_sort) begin sc_i <= 9'd0; n_act <= 9'd0; vs <= V_SCAN; end
+            end
+            // ---- object DMA
+            V_DMA_RD: begin
+                if (d_src == 9'd256) begin
+                    if (d_dst == 9'd256) begin dma_done <= 1'b1; sc_i <= 9'd0; n_act <= 9'd0; vs <= V_SCAN; end
+                    else vs <= V_DMA_CLR;
+                end else begin
+                    sr_addr <= {d_src[7:0], 7'd0};
+                    d_w <= 4'd0;
+                    vs <= V_DMA_W0;
+                end
+            end
+            V_DMA_W0: vs <= V_DMA_CP;       // read in flight
+            V_DMA_CP: begin
+                // sr_q is word d_w of source entry d_src
+                if (d_w == 4'd0 && (!sr_q[15] || (bucky && sr_q[7:0] == 8'd0))) begin d_src <= d_src + 9'd1; vs <= V_DMA_RD; end
+                else begin
+                    l_we <= 1'b1; l_wbank <= d_w[2:0]; l_waddr <= d_dst[7:0]; l_wd <= sr_q;
+                    if (d_w == 4'd7) begin
+                        d_dst <= d_dst + 9'd1; d_src <= d_src + 9'd1; vs <= V_DMA_RD;
+                    end else begin
+                        d_w <= d_w + 4'd1;
+                        sr_addr <= {d_src[7:0], 4'd0, 3'(d_w + 4'd1)};
+                        vs <= V_DMA_W0;
+                    end
+                end
+            end
+            V_DMA_CLR: begin                // word 0 of every entry not filled
+                l_we <= 1'b1; l_wbank <= 3'd0; l_waddr <= d_dst[7:0]; l_wd <= 16'd0;
+                d_dst <= d_dst + 9'd1;
+                if (d_dst == 9'd255) begin dma_done <= 1'b1; sc_i <= 9'd0; n_act <= 9'd0; vs <= V_SCAN; end
+            end
+            // ---- collect the active entries, in list order
+            V_SCAN: begin
+                if (sc_i == 9'd256) begin so_y <= 9'd0; vs <= V_SO_Y; end
+                else begin v_lraddr <= sc_i[7:0]; vs <= V_SCANW; end
+            end
+            V_SCANW: vs <= V_SCANC;
+            V_SCANC: begin
+                if (l_q[0][15]) begin
+                    s_we <= 1'b1; s_waddr <= n_act[7:0]; s_wd <= {sc_i[7:0], l_q[0][7:0]};
+                    n_act <= n_act + 9'd1;
+                end
+                sc_i <= sc_i + 9'd1;
+                vs <= V_SCAN;
+            end
+            // ---- the exchange sort (k053247_sprites_draw_common):
+            //   for y: cur = lst[y]
+            //     for x > y: if z(cur) <= z(lst[x]): lst[x] = cur; cur = lst[x]
+            //     lst[y] = cur
+            V_SO_Y: begin
+                if (n_act < 9'd2 || so_y >= n_act - 9'd1) vs <= V_IDLE;
+                else begin v_sraddr <= so_y[7:0]; vs <= V_SO_YW; end
+            end
+            V_SO_YW: vs <= V_SO_YQ;
+            V_SO_YQ: begin so_cur <= s_q; so_x <= so_y + 9'd1; vs <= V_SO_X; end
+            V_SO_X: begin v_sraddr <= so_x[7:0]; vs <= V_SO_XW; end
+            V_SO_XW: vs <= V_SO_XC;
+            V_SO_XC: begin
+                if (so_cur[7:0] <= s_q[7:0]) begin
+                    s_we <= 1'b1; s_waddr <= so_x[7:0]; s_wd <= so_cur;
+                    so_cur <= s_q;
+                end
+                if (so_x == n_act - 9'd1) vs <= V_SO_WY;
+                else begin so_x <= so_x + 9'd1; vs <= V_SO_X; end
+            end
+            V_SO_WY: begin
+                s_we <= 1'b1; s_waddr <= so_y[7:0]; s_wd <= so_cur;
+                so_y <= so_y + 9'd1;
+                vs <= V_SO_Y;
+            end
+            default: vs <= V_IDLE;
+        endcase
+        if (rst) begin vs <= V_IDLE; n_act <= 9'd0; end
+    end
+
+
+    // ------------------------------------------------------------ line engine
+    typedef enum logic [4:0] {
+        E_IDLE, E_NEXT, E_S1, E_S2, E_L1, E_L2, E_Z1, E_G1, E_G2, E_V,
+        E_VC, E_R0, E_R1, E_RW, E_R2, E_R3, E_C0, E_CA, E_CM, E_C1, E_C2, E_PUSH, E_NX, E_DONE
+    } est_t;
+    est_t es;
+    logic  [8:0] Y;
+    logic        eb;
+    logic  [8:0] ei;                          // sprites done this line
+    logic [15:0] w0, w1, w6;
+    logic  [9:0] wx, wy;
+    logic [23:0] zx, zy;
+    logic        nozoom;
+    logic signed [16:0] ox, oy;
+    logic  [2:0] xa, ya;
+    logic  [1:0] wl, hl;
+    logic  [3:0] k, cx;                       // cell row, cell column
+    logic [26:0] accy, accx;
+    logic signed [16:0] top, nxt;
+    logic [11:0] dsth, m;
+    logic  [5:0] ty;
+    logic        fy, dbl, pass;
+    logic  [3:0] row_a, row_b;
+    logic signed [16:0] sx, c_s0, c_s1, v_t0, v_t1;
+    logic [10:0] pmul;
+    logic [11:0] zw;
+    logic        fx;
+    logic  [5:0] tx;
+    logic signed [33:0] acc, step;
+    logic signed [16:0] pi, pi1;              // pixel index range within the cell
+    logic [63:0] rowd;
+    logic  [1:0] cls;
+    logic  [6:0] pbase;
+    logic        shd_on;
+    logic  [1:0] preset;
+    logic [15:0] cyc;
+    logic        clr_on;                      // clearing this line's half
+    logic  [8:0] clr_x;
+    logic        rs_pend;                     // a line started while busy
+    logic  [8:0] rs_line;
+    logic        rs_buf;
+    // where it is taken: anywhere but with a fetch in flight (and from idle,
+    // when the line ended on the clock the next one was asked for)
+    wire         restart = rs_pend && es != E_C1 && es != E_CM && es != E_C2;
+
+    // the queue between the front end and the back end: one cell each
+    localparam int QW = 64 + 34 + 34 + 17 * 3 + 7 + 2 + 1 + 2;
+    logic [QW-1:0] q_mem [4];
+    logic  [1:0] q_wp, q_rp;
+    logic  [2:0] q_n;
+    logic        q_push, q_pop;
+    wire         q_full  = (q_n == 3'd4);
+    wire         q_empty = (q_n == 3'd0);
+    wire [QW-1:0] q_head = q_mem[q_rp];
+
+    // the back end: the cell being drawn
+    logic        b_on;
+    logic [63:0] b_rowd;
+    logic signed [33:0] b_acc, b_step;
+    logic signed [16:0] b_sx, b_pi, b_pi1;
+    logic  [6:0] b_pbase;
+    logic  [1:0] b_cls, b_pre;
+    logic        b_shd;
+
+    // line buffer (see the header)
+    logic  [5:0] fl [1024];             // {c, s, pre[1:0], scls[1:0]}
+    logic [18:0] dl [1024];             // {c, idx[10:0], cls[1:0], s, pre[1:0], scls[1:0]}
+    logic  [9:0] f_ra, f_wa;
+    logic  [5:0] f_q, f_wd;
+    logic        f_we;
+    logic [18:0] d_wd;
+    // pixel pipeline, stage 1: the pixel whose flags are being read now
+    logic        p1_v;
+    logic  [9:0] p1_a;
+    logic  [3:0] p1_pen;
+    logic  [6:0] p1_pbase;
+    logic  [1:0] p1_cls, p1_pre;
+    logic        p1_shd;
+    // the last two flags written, for a read that raced its write: cells
+    // run back to back, so a pixel can land on one written two clocks before
+    logic        lw_v, lw2_v;
+    logic  [9:0] lw_a, lw2_a;
+    logic  [5:0] lw_d, lw2_d;
+    always_ff @(posedge clk) begin
+        if (f_we) begin fl[f_wa] <= f_wd; dl[f_wa] <= d_wd; end
+        f_q <= fl[f_ra];
+    end
+    assign busy = (es != E_IDLE);
+
+    localparam int XOFF [8] = '{0, 1, 4, 5, 16, 17, 20, 21};
+    localparam int YOFF [8] = '{0, 2, 8, 10, 32, 34, 40, 42};
+    function automatic [5:0] xoff(input [2:0] i); xoff = 6'(XOFF[i]); endfunction
+    function automatic [5:0] yoff(input [2:0] i); yoff = 6'(YOFF[i]); endfunction
+
+    // pen of source column c of a 64-bit row (spritelayout nibbles
+    // 2,3,0,1,6,7,4,5, 10,11,8,9,14,15,12,13; nibble n is q[63-4n -: 4])
+    function automatic [3:0] spen(input [63:0] q, input [3:0] c);
+        logic [3:0] n;
+        n = {c[3:2], ~c[1], c[0]};
+        spen = q[63 - 4 * int'(n) -: 4];
+    endfunction
+
+    wire signed [16:0] offx = 17'($signed(16'({k246[0], k246[1]})));
+    wire signed [16:0] offy = 17'($signed(16'({k246[2], k246[3]})));
+    wire  [5:0] pri = w6[9:4];
+    wire  [3:0] pen = spen(b_rowd, 4'(b_acc >>> 16));
+    wire signed [16:0] X = b_sx + b_pi;
+    wire  [8:0] Xu = X[8:0];
+    assign f_ra = {eb, Xu};
+
+    // stage 1: decide on the flags just read and write both RAMs
+    always_ff @(posedge clk) begin
+        f_we <= 1'b0;
+        lw_v <= 1'b0;
+        lw2_v <= lw_v; lw2_a <= lw_a; lw2_d <= lw_d;
+        if (clr_on) begin
+            f_we <= 1'b1; f_wa <= {eb, clr_x}; f_wd <= 6'd0; d_wd <= 19'd0;
+        end else if (p1_v) begin
+            logic [5:0] cur;
+            cur = (lw_v && lw_a == p1_a) ? lw_d : (lw2_v && lw2_a == p1_a) ? lw2_d : f_q;
+            if (p1_pen != 4'd15 || !p1_shd) begin
+                if (!cur[5]) begin
+                    f_we <= 1'b1; f_wa <= p1_a; f_wd <= {1'b1, cur[4:0]};
+                    d_wd <= {1'b1, {p1_pbase, 4'b0000} + {7'd0, p1_pen}, p1_cls, cur[4:0]};
+                    lw_v <= 1'b1; lw_a <= p1_a; lw_d <= {1'b1, cur[4:0]};
+                end
+            end else if (!cur[5] && !cur[4]) begin
+                f_we <= 1'b1; f_wa <= p1_a; f_wd <= {2'b01, p1_pre, p1_cls};
+                d_wd <= {1'b0, 11'd0, 2'd0, 1'b1, p1_pre, p1_cls};
+                lw_v <= 1'b1; lw_a <= p1_a; lw_d <= {2'b01, p1_pre, p1_cls};
+            end
+        end
+    end
+
+    // the queue
+    always_ff @(posedge clk) begin
+        if (q_push) begin
+            q_mem[q_wp] <= {rowd, acc, step, sx, pi, pi1, pbase, cls, shd_on, preset};
+            q_wp <= q_wp + 2'd1;
+        end
+        if (q_pop) q_rp <= q_rp + 2'd1;
+        q_n <= q_n + 3'(q_push) - 3'(q_pop);
+        if (rst || (es == E_IDLE && start) || restart) begin
+            q_wp <= 2'd0; q_rp <= 2'd0; q_n <= 3'd0;
+        end
+    end
+
+    // the back end: a pixel a clock, the next queued cell straight after
+    always_ff @(posedge clk) begin
+        p1_v <= 1'b0;
+        q_pop <= 1'b0;
+        if (b_on) begin
+            // stage 0: this pixel's flags are read this clock (f_ra)
+            p1_v <= (pen != 4'd0); p1_a <= {eb, Xu}; p1_pen <= pen;
+            p1_pbase <= b_pbase; p1_cls <= b_cls; p1_pre <= b_pre; p1_shd <= b_shd;
+            b_acc <= b_acc + b_step;
+            b_pi  <= b_pi + 17'sd1;
+        end
+        if ((!b_on || b_pi == b_pi1) && !q_empty && !q_pop && !clr_on) begin
+            {b_rowd, b_acc, b_step, b_sx, b_pi, b_pi1, b_pbase, b_cls, b_shd, b_pre} <= q_head;
+            b_on <= 1'b1; q_pop <= 1'b1;
+        end else if (b_on && b_pi == b_pi1) b_on <= 1'b0;
+        if (rst || (es == E_IDLE && start) || restart) begin
+            b_on <= 1'b0; q_pop <= 1'b0; p1_v <= 1'b0;
+        end
+    end
+
+    // the front end
+    always_ff @(posedge clk) begin
+        q_push <= 1'b0;
+        if (es != E_IDLE && cyc != 16'hFFFF) cyc <= cyc + 16'd1;
+        if (clr_on) begin
+            clr_x <= clr_x + 9'd1;
+            if (clr_x == 9'd423) clr_on <= 1'b0;
+        end
+        case (es)
+            E_IDLE: if (start) begin
+                Y <= line; eb <= buf_sel; ei <= 9'd0; cyc <= 16'd0;
+                clr_x <= 9'd40; clr_on <= 1'b1;
+                es <= E_NEXT;
+            end
+            E_NEXT: begin
+                if (ei >= n_act) es <= E_DONE;
+                else begin e_sraddr <= 8'(n_act - 9'd1 - ei); es <= E_S1; end
+            end
+            E_S1: es <= E_S2;
+            E_S2: begin e_lraddr <= s_q[15:8]; es <= E_L1; end
+            E_L1: es <= E_L2;
+            E_L2: begin
+                w0 <= l_q[0]; w1 <= l_q[1]; w6 <= l_q[6];
+                wy <= l_q[2][9:0]; wx <= l_q[3][9:0];
+                z_a0 <= l_q[4][9:0];
+                z_a1 <= l_q[0][14] ? l_q[4][9:0] : l_q[5][9:0];
+                nozoom <= (l_q[4][9:0] == 10'h40) && ((l_q[0][14] ? l_q[4][9:0] : l_q[5][9:0]) == 10'h40);
+                es <= E_Z1;
+            end
+            E_Z1: es <= E_G1;
+            E_G1: begin
+                zy <= z_q0; zx <= z_q1;
+                xa <= {w1[4], w1[2], w1[0]}; ya <= {w1[5], w1[3], w1[1]};
+                wl <= w0[9:8]; hl <= w0[11:10];
+                // wrap and global offsets: ox = (x - offx) & 1023, oy = (-y - offy) & 1023,
+                // wrapped at 1024-384 and 1024-512, then the chip's dx/dy (-47, +23)
+                begin
+                    logic [9:0] ox1, oy1;
+                    ox1 = 10'(17'(wx) - offx);
+                    oy1 = 10'(17'sd0 - 17'(wy) - offy);
+                    ox <= (ox1 >= 10'd640 ? 17'(ox1) - 17'sd1024 : 17'(ox1)) - (bucky ? 17'sd48 : 17'sd47);
+                    oy <= (oy1 >= 10'd512 ? 17'(oy1) - 17'sd1024 : 17'(oy1)) - 17'sd23;
+                end
+                begin
+                    logic [2:0] pc;
+                    pc = (pri <= lp2) ? 3'd0 : (pri <= lp1) ? 3'd1 : (pri <= lp0) ? 3'd2 : 3'd3;
+                    cls <= pc[1:0];
+                end
+                pbase  <= colorbase | {2'b00, w6[4:0]};
+                shd_on <= (w6[11:10] != 2'd0);
+                preset <= w6[11:10] - 2'd1;
+                es <= E_G2;
+            end
+            E_G2: begin
+                // the coordinates are the sprite's centre
+                ox <= ox - 17'(({3'd0, zx} << wl) >> 13);
+                oy <= oy - 17'(({3'd0, zy} << hl) >> 13);
+                k <= 4'd0; accy <= 27'd0;
+                es <= E_V;
+            end
+            E_V: begin
+                // row k spans [oy + (zy*k + 0x800) >> 12, oy + (zy*(k+1) + 0x800) >> 12):
+                // the two edges here, the decision next clock
+                v_t0 <= oy + 17'((accy + 27'h800) >> 12);
+                v_t1 <= oy + 17'((accy + 27'(zy) + 27'h800) >> 12);
+                es <= E_VC;
+            end
+            E_VC: begin
+                if (k == 4'd0 && $signed({8'd0, Y}) < v_t0) es <= E_NX;     // above the sprite
+                else if ($signed({8'd0, Y}) < v_t1) begin
+                    top <= v_t0; nxt <= v_t1; es <= E_R0;
+                end else if (k == 4'((1 << hl) - 1)) es <= E_NX;           // below it
+                else begin k <= k + 4'd1; accy <= accy + 27'(zy); es <= E_V; end
+            end
+            E_R0: begin
+                logic [3:0] h;
+                logic mir;
+                h = 4'(1 << hl);
+                mir = w6[15];
+                dsth <= 12'(nxt - top);
+                m    <= 12'($signed({8'd0, Y}) - top);
+                if (mir) begin
+                    if ((!w0[13]) ^ ({k, 1'b0} >= {1'b0, h})) begin ty <= yoff(3'(h - 4'd1 - k + 4'(ya))); fy <= 1'b1; end
+                    else begin ty <= yoff(3'(k + 4'(ya))); fy <= 1'b0; end
+                end else begin
+                    ty <= yoff(3'(w0[13] ? (h - 4'd1 - k + 4'(ya)) : (k + 4'(ya))));
+                    fy <= w0[13];
+                end
+                dbl <= mir && (hl == 2'd0);                 // "Simpsons shadows": each cell twice
+                r_a <= (12'(nxt - top) > 12'd2047) ? 11'd2047 : 11'(nxt - top);
+                es <= E_R1;
+            end
+            E_R1: es <= E_RW;
+            E_RW: es <= E_R2;
+            E_R2: begin
+                // source row = (m * dy) >> 16, or (dsth - 1 - m) * dy >> 16 flipped
+                logic [32:0] pa, pb;
+                pa = 33'(m[10:0]) * 33'(r_q);
+                pb = 33'(11'(dsth - 12'd1 - m)) * 33'(r_q);
+                row_a <= fy ? pb[19:16] : pa[19:16];
+                row_b <= fy ? pa[19:16] : pb[19:16];      // the second blit's, y-flipped
+                cx <= 4'd0; accx <= 27'd0; pass <= 1'b0;
+                es <= E_C0;
+            end
+            E_C0: begin
+                // the cell's two edges, registered: the mirror and cull
+                // decisions are the next state's (one state had both, and it
+                // was the video's slowest path)
+                c_s0 <= ox + 17'((accx + 27'h800) >> 12);
+                c_s1 <= ox + 17'((accx + 27'(zx) + 27'h800) >> 12);
+                es <= E_CA;
+            end
+            E_CA: begin
+                logic [3:0] w;
+                logic mirx, flx;
+                w = 4'(1 << wl);
+                mirx = w6[14];
+                flx = w0[12] && !mirx;                      // mirror x overrides flip x
+                sx <= c_s0;
+                zw <= 12'(c_s1 - c_s0);
+                if (mirx) begin
+                    if ((!flx) ^ ({cx, 1'b0} < {1'b0, w})) begin tx <= xoff(3'(w - 4'd1 - cx + 4'(xa))); fx <= 1'b1; end
+                    else begin tx <= xoff(3'(cx + 4'(xa))); fx <= 1'b0; end
+                end else begin
+                    tx <= xoff(3'(flx ? (w - 4'd1 - cx + 4'(xa)) : (cx + 4'(xa))));
+                    fx <= flx;
+                end
+                r_a <= (12'(c_s1 - c_s0) > 12'd2047) ? 11'd2047 : 11'(c_s1 - c_s0);
+                // culled (empty, or wholly outside x 40..423): on to the next cell
+                if (c_s1 <= c_s0 || c_s0 > 17'sd423 || c_s1 - 17'sd1 < 17'sd40) es <= E_R3;
+                else es <= E_C1;
+            end
+            E_C1: begin
+                // (r_q, dx, is two clocks away: E_CM and E_C2 cover it)
+                rom_addr <= {w1[15:6], 6'(tx + ty), pass ? row_b : row_a};
+                rom_req  <= 1'b1;
+                pi  <= (sx < 17'sd40) ? 17'sd40 - sx : 17'sd0;
+                pi1 <= (sx + 17'(zw) - 17'sd1 > 17'sd423) ? 17'sd423 - sx : 17'(zw) - 17'sd1;
+                es <= E_CM;
+            end
+            E_CM: begin
+                // the first source column's multiplier, registered ahead of the multiply
+                pmul <= fx ? 11'(zw - 12'd1 - 12'(pi)) : 11'(pi);
+                es <= E_C2;
+            end
+            E_C2: begin
+                // r_q is dx; the fetch is in flight
+                acc  <= 34'(pmul) * 34'(r_q);
+                step <= fx ? (34'sd0 - 34'(r_q)) : 34'(r_q);
+                if (rom_ack) begin rom_req <= 1'b0; rowd <= rom_q; es <= E_PUSH; end
+                else es <= E_C2;
+            end
+            E_PUSH: begin
+                // into the queue (the push is a clock behind: counted here)
+                if (!q_full && !(q_push && q_n == 3'd3)) begin q_push <= 1'b1; es <= E_R3; end
+            end
+            E_R3: begin
+                // next blit of this cell, or the next cell
+                if (dbl && !pass) begin pass <= 1'b1; es <= E_C0; end
+                else begin
+                    pass <= 1'b0;
+                    if (cx == 4'((1 << wl) - 1)) es <= E_NX;
+                    else begin cx <= cx + 4'd1; accx <= accx + 27'(zx); es <= E_C0; end
+                end
+            end
+            E_NX: begin ei <= ei + 9'd1; es <= E_NEXT; end
+            E_DONE: begin
+                // the list is walked; done when the back end has drawn the queue
+                if (!q_push && q_empty && !b_on && !q_pop && !clr_on) begin
+                    if (cyc > worst_line) worst_line <= cyc;
+                    es <= E_IDLE;
+                end
+            end
+            default: es <= E_IDLE;
+        endcase
+        if (start && es != E_IDLE) begin
+            missed <= 1'b1;
+            rs_pend <= 1'b1; rs_line <= line; rs_buf <= buf_sel;
+        end
+        // an overrun: abandon this line where no fetch is in flight, and start
+        // the one that was asked for
+        if (restart) begin
+            rs_pend <= 1'b0; q_push <= 1'b0;
+            Y <= rs_line; eb <= rs_buf; ei <= 9'd0; cyc <= 16'd0;
+            clr_x <= 9'd40; clr_on <= 1'b1;
+            if (cyc > worst_line) worst_line <= cyc;
+            es <= E_NEXT;
+        end
+        if (rst) begin
+            es <= E_IDLE; rom_req <= 1'b0; missed <= 1'b0; worst_line <= 16'd0;
+            rs_pend <= 1'b0; clr_on <= 1'b0; q_push <= 1'b0;
+        end
+    end
+
+    // the mixer's read port
+    logic [18:0] mx_q;
+    always_ff @(posedge clk) mx_q <= dl[{mx_buf, mx_x}];
+    assign mx_claim  = mx_q[18];
+    assign mx_cdata  = mx_q[17:5];
+    assign mx_shadow = mx_q[4];
+    assign mx_sdata  = mx_q[3:0];
+endmodule
+
+`default_nettype wire
