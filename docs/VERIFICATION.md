@@ -1,4 +1,4 @@
-# Verification scope for 0.4.0
+# Verification scope for 0.4.1
 
 All 114 available qualified inputs match their recorded digests. All 116 fitted timing checks pass over four corners, worst margin +0.088 ns, with zero unconstrained paths and no unexpected ignored constraints.
 

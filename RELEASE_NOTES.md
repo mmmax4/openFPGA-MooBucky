@@ -1,11 +1,10 @@
-# MooBucky 0.4.0
+# MooBucky 0.4.1
 
-MooBucky 0.4.0 for Analogue Pocket openFPGA.
+MooBucky 0.4.1 for Analogue Pocket openFPGA.
 
 ## Changes
 
-- Optional momentary Test and Service button assignments, initially Unassigned.
-- Correct original Moo Mesa/Bucky platform marquee, including the Konami logo.
+- Full game-title selection names with matching per-game presets.
 
 ## High scores
 
@@ -16,7 +15,7 @@ are not implemented.
 
 ## Installation
 
-Download **mmmax4.moobucky-v0.4.0.zip**.
+Download **mmmax4.moobucky-v0.4.1.zip**.
 Copy Cores, Platforms, Assets and Presets to the SD root. Supply your own
 World EAB `moomesa.zip` and `bucky.zip`; the included builders create the
 two ROM images. See the repository README for setup and controls.

@@ -12,7 +12,7 @@ from check_apf_package import audit
 
 ROOT = Path(__file__).resolve().parents[1]
 CORE_ID = 'mmmax4.moobucky'
-TITLES = ['Bucky EAB.json', 'Moo Mesa EAB.json']
+TITLES = ["Bucky O'Hare - EAB.json", 'Wild West C.O.W.-Boys of Moo Mesa - EAB.json']
 
 
 def validate(files, bitstream_filename, bitstream_sha256):

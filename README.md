@@ -9,8 +9,8 @@ maintained by **mmmax4**, based on plasticbugs' Moo Mesa implementation.
 
 | Selection | ROM set | Image filename |
 | --- | --- | --- |
-| Moo Mesa EAB | MAME World parent `moomesa`, ver EAB | `moomesa.rom` |
-| Bucky EAB | MAME World parent `bucky`, ver EAB | `bucky.rom` |
+| Wild West C.O.W.-Boys of Moo Mesa - EAB | MAME World parent `moomesa`, ver EAB | `moomesa.rom` |
+| Bucky O'Hare - EAB | MAME World parent `bucky`, ver EAB | `bucky.rom` |
 
 The core includes complete audio and independent ROM, EEPROM and per-game
 settings. Both games have passed Pocket tests. Other

@@ -1,5 +1,5 @@
 {
-  "version": "0.4.0",
+  "version": "0.4.1",
   "qualified_source_hashes": {
     "core/rtl/clk_enables.sv": "7d583c3768a28a9f253a96230716bbe5e6b0f695458ea7c14384360bef9c23cb",
     "core/rtl/dbg_fault.sv": "567279d567c01fd3ea3db9d6694baa2812055e0d5562ec5f999e0ef00697133d",
@@ -125,7 +125,7 @@
   "marquee_sha256": "323c67ed8eb5dfeb92be99c3ed23eacdb92a769e727dfe95629788db2082c471",
   "table_generator_sha256": "31a00001cadb23d8516f1b635b033d853c8beb934437adfdaf71332efa22ff30",
   "original_machine_pin": "b469b7a227881754071fa59ed8404ca52c9f9389",
-  "source_commit": "45ed220e8bb5f5f5251d5a8c8b64a6f5d8da15cc",
+  "source_commit": null,
   "new_build_or_simulation": false,
   "game_data_included": false
 }

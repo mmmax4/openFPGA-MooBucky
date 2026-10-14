@@ -1,4 +1,4 @@
-MooBucky 0.4.0 by mmmax4
+MooBucky 0.4.1 by mmmax4
 Moo Mesa / Bucky O'Hare, World EAB
 
 D-pad: move; A/Y: jump; B: shoot.

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1
+
+- Full game-title selection names with matching per-game presets.
+
 ## 0.4.0
 
 - Optional momentary Test and Service button assignments, initially Unassigned.

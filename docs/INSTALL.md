@@ -4,12 +4,15 @@ Merge `Cores`, `Platforms`, `Assets` and `Presets` from the release into your
 Pocket SD root. Add your verified `moomesa.rom` and `bucky.rom` to
 `Assets/moobucky/mmmax4.moobucky/`. Open **moobucky** and choose:
 
-- `Moo Mesa EAB`
-- `Bucky EAB`
+- `Wild West C.O.W.-Boys of Moo Mesa - EAB`
+- `Bucky O'Hare - EAB`
 
-Instance JSONs and per-game presets use the same filename.
-ROM images are moomesa.rom and bucky.rom, with separate moomesa.sav
-and bucky.sav EEPROM files. Preserve existing settings and saves.
+The corresponding instance JSON and Interact Preset use the same full filename.
+ROM and EEPROM filenames remain `moomesa.rom` / `moomesa.sav` and
+`bucky.rom` / `bucky.sav`; changing the selectable title does not change them.
+Settings belong to the primary asset filename. Existing settings saved under
+`Moo Mesa EAB.json` or `Bucky EAB.json` may need reselecting after the rename.
+Preserve old SD settings and saves; the release contains neither.
 
 EEPROM paths are `Saves/moobucky/common/moomesa.sav` and
 `Saves/moobucky/common/bucky.sav`. Back up existing saves before transferring
