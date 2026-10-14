@@ -3,7 +3,10 @@
 One arcade core for **Wild West C.O.W.-Boys of Moo Mesa** and **Bucky O'Hare**,
 maintained by **mmmax4**, based on plasticbugs' Moo Mesa implementation.
 
-![Moo Mesa and Bucky O'Hare](docs/images/marquee.png)
+<p align="center">
+  <img src="docs/images/moomesa-title.png" width="320" height="240" alt="Wild West C.O.W.-Boys of Moo Mesa title screen">
+  <img src="docs/images/bucky-title.png" width="320" height="240" alt="Bucky O'Hare title screen">
+</p>
 
 ## Supported games
 

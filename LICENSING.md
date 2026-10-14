@@ -12,6 +12,6 @@ license texts are included. Third-party notices also accompany compiled releases
 Analogue platform and Intel generated-IP/device notices apply to their files;
 no proprietary Quartus library or tool binaries are distributed.
 
-Original game names, characters and marquee artwork remain their respective
+Original game names, characters, screenshots and marquee artwork remain their respective
 owners' works, separate from the software terms. No game ROM, save, private
 hardware recording or permission conversation is distributed.
