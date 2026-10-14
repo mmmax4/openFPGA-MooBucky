@@ -28,7 +28,7 @@ def validate(files, bitstream_filename, bitstream_sha256):
         raise SystemExit('Unexpected SD payload/dependency: ' + repr(sorted(set(files) ^ expected)))
     contract = {'layout': 'dual_eab_instances', 'core_id': CORE_ID,
         'platform_id': 'moobucky', 'firmware_minimum': '2.0',
-        'dip_menu_layout': 'independent_fields', 
+        'dip_menu_layout': 'independent_fields', 'cabinet_buttons_layout': 'optional_p1_selectors',
         'marquee_sha256': '323c67ed8eb5dfeb92be99c3ed23eacdb92a769e727dfe95629788db2082c471',
         'pocket_bitstream_sha256': bitstream_sha256,
         'private_only': True, 'hardware_gameplay_verified': False}

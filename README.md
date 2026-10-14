@@ -39,7 +39,10 @@ See [installation and saves](docs/INSTALL.md), [ROM setup](docs/ROM_SETUP.md),
 | Start | Start |
 
 `DIP: Sound`, `DIP: Coins` and `DIP: Players` have independent choices.
-Use the manual Test switch in Core Settings. Optional momentary Test/Service assignments are available from 0.4.0. Difficulty and lives are configured in the game's service menu.
+`Test Button` and `Service Button` initially show **Unassigned**. Choose a P1
+key in Core Settings to use either momentary input. The existing manual
+`Test Switch (hold)` is also available. Assigning a gameplay key retains its
+gameplay action. Difficulty and lives are configured in the game's service menu.
 
 Existing Dock connections support four players; P3/P4 use digital D-pads.
 A dedicated four-controller hardware test is not separately documented.

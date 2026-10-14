@@ -1,12 +1,11 @@
-# MooBucky 0.3.0
+# MooBucky 0.4.0
 
-MooBucky 0.3.0 for Analogue Pocket openFPGA.
+MooBucky 0.4.0 for Analogue Pocket openFPGA.
 
 ## Changes
 
-- Shared World EAB core for Moo Mesa and Bucky O'Hare.
-- Independent DIP choices for sound, coins and two/three/four players.
-- Separate game instances, cabinet EEPROM files and per-game presets.
+- Optional momentary Test and Service button assignments, initially Unassigned.
+- Correct original Moo Mesa/Bucky platform marquee, including the Konami logo.
 
 ## High scores
 
@@ -17,7 +16,7 @@ are not implemented.
 
 ## Installation
 
-Download **mmmax4.moobucky-v0.3.0.zip**.
+Download **mmmax4.moobucky-v0.4.0.zip**.
 Copy Cores, Platforms, Assets and Presets to the SD root. Supply your own
 World EAB `moomesa.zip` and `bucky.zip`; the included builders create the
 two ROM images. See the repository README for setup and controls.

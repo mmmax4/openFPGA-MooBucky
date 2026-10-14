@@ -879,8 +879,32 @@ module core_top
                            c3_s2[1], c3_s2[0], c3_s2[3], c3_s2[2]);
     wire [7:0] g_p4 = kpad(c4_s2[15], game_bucky && c4_s2[6], c4_s2[4] | c4_s2[7], c4_s2[5] | (!game_bucky && c4_s2[6]),
                            c4_s2[1], c4_s2[0], c4_s2[3], c4_s2[2]);
-    wire [7:0] g_in0 = ~{4'b0000, c4_s2[14], c3_s2[14], p2_select, p1_select};
-    wire       g_test_n = !svc;
+    // BEGIN OPTIONAL CABINET BUTTONS
+    // Two independent selectors in unused modifier bits 16..23. Zero means
+    // unassigned. Read synchronized button levels; never latch a key press.
+    // These are the logical Pocket keys after the OS controller remapping.
+    function automatic cabinet_button(input [3:0] select_key, input [7:0] keys);
+        case (select_key)
+            4'd1: cabinet_button = keys[0]; // A
+            4'd2: cabinet_button = keys[1]; // B
+            4'd3: cabinet_button = keys[2]; // X
+            4'd4: cabinet_button = keys[3]; // Y
+            4'd5: cabinet_button = keys[4]; // L
+            4'd6: cabinet_button = keys[5]; // R
+            4'd7: cabinet_button = keys[6]; // Select
+            4'd8: cabinet_button = keys[7]; // Start
+            default: cabinet_button = 1'b0;
+        endcase
+    endfunction
+    wire [7:0] cabinet_keys = {p1_start, p1_select, p1_btn_r1, p1_btn_l1,
+                               p1_btn_y, p1_btn_x, p1_btn_b, p1_btn_a};
+    wire test_button = cabinet_button(mod_sw2[3:0], cabinet_keys);
+    wire service_button = cabinet_button(mod_sw2[7:4], cabinet_keys);
+    // Service 1 is IN0 bit 4; Test is IN1 bit 3. Keep all four coin inputs
+    // and the existing manual Test switch. Neither button requests a reset.
+    wire [7:0] g_in0 = ~{3'b000, service_button, c4_s2[14], c3_s2[14], p2_select, p1_select};
+    wire       g_test_n = !(svc | test_button);
+    // END OPTIONAL CABINET BUTTONS
 
     //! DIP switches SW1:1-4 (IN1 bits 4-7).  The menu word starts at zero and
     //! is XORed with the factory setting, so nothing set is the board as it

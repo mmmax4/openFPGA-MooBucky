@@ -18,9 +18,10 @@ are handled by Pocket OS; avoid replacing user Settings with bundled defaults.
 
 Select DIP sound output, common/independent coins and 2/3/4 players separately.
 Changing a DIP selection follows the existing game-reset behavior.
-Use the manual Test switch in Core Settings for the original service menu.
-Sleep is not supported by the current core.
-
+Test and Service assignments start Unassigned. A Test button asserts the Test
+input only while held; the game's service screen decides how to exit.
+Service is the separate Service 1 input. Leave the manual Test switch off when
+using the momentary button. Sleep is not supported by the current core.
 
 ## High scores
 

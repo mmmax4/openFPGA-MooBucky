@@ -62,12 +62,22 @@ module clk_enables (
     // pulse registered just before a pause still fires; the frozen divider
     // then makes no more, so the count-to-pulse rule above holds.
     wire run = !pause;
-    wire [2:0] d6  = 3'(div % 6'd6);
+    // Exact div % 6 compares over every 6-bit value, including 48..63.
+    // Decode directly so synthesis cannot build a carry-chain divider on
+    // the div-to-68000-enable path. Counter, pulse phase and latency stay fixed.
+    wire phi1_decode = (div == 6'd5)  || (div == 6'd11) || (div == 6'd17)
+                     || (div == 6'd23) || (div == 6'd29) || (div == 6'd35)
+                     || (div == 6'd41) || (div == 6'd47) || (div == 6'd53)
+                     || (div == 6'd59);
+    wire phi2_decode = (div == 6'd2)  || (div == 6'd8)  || (div == 6'd14)
+                     || (div == 6'd20) || (div == 6'd26) || (div == 6'd32)
+                     || (div == 6'd38) || (div == 6'd44) || (div == 6'd50)
+                     || (div == 6'd56) || (div == 6'd62);
     wire [3:0] d12 = 4'(div % 6'd12);
     wire [4:0] d24 = 5'(div % 6'd24);
     always_ff @(posedge clk) begin
-        cen_phi1 <= run && (d6 == 3'd5);                    // 96 / 6 = 16 MHz
-        cen_phi2 <= run && (d6 == 3'd2);
+        cen_phi1 <= run && phi1_decode;                    // 96 / 6 = 16 MHz
+        cen_phi2 <= run && phi2_decode;
         cen_z80  <= run && (d12 == 4'd0);                   // 8 MHz
         cen_ym   <= run && (d24 == 5'd4);                   // 4 MHz
         cen_ym2  <= run && (div == 6'd4);                   // 2 MHz

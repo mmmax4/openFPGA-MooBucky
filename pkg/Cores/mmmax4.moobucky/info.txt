@@ -1,10 +1,11 @@
-MooBucky 0.3.0 by mmmax4
+MooBucky 0.4.0 by mmmax4
 Moo Mesa / Bucky O'Hare, World EAB
 
 D-pad: move; A/Y: jump; B: shoot.
 X: Bucky button 3 / Moo alternate shoot.
 Select: coin; Start: start.
 DIP: Sound, Coins and Players in Core Settings.
+Test/Service buttons: assign P1 keys in Core Settings.
 Test Switch (hold): manual Test menu entry.
 EEPROM saves cabinet settings; RAM high scores are not saved.
 No ROMs or saves included.

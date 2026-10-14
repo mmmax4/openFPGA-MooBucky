@@ -16,7 +16,7 @@ import zipfile
 from apf_packaging import validate_bitstream_filename, validate_core_folder_identity
 
 
-def audit(path):
+def audit(path, *, rom_free_manifest=None):
     issues, files, names = [], {}, []
     if path.is_file():
         with zipfile.ZipFile(path) as archive:
@@ -135,10 +135,18 @@ def audit(path):
         require(save_slot['required'] is False and save_slot['nonvolatile'] is True and
                 number(save_slot['parameters']) == 32 and number(save_slot['address']) == 0x20000000 and
                 number(save_slot['size_maximum']) == 128 and save_slot['extensions'] == ['sav'], 'Invalid EEPROM slot')
-        manifest = json.loads(files['TEST_MANIFEST.json'])
+        # A ROM-free release supplies its external-ROM contract in memory;
+        # private packages retain their original embedded manifest and hashes.
+        manifest = rom_free_manifest if rom_free_manifest is not None else json.loads(files['TEST_MANIFEST.json'])
         require(manifest['layout'] == 'dual_eab_instances' and manifest['core_id'] == core_id and
                 manifest['platform_id'] == platform_ids[0], 'Manifest identity mismatch')
         require(manifest['firmware_minimum'] == framework['version_required'], 'Manifest firmware mismatch')
+        if 'marquee_sha256' in manifest:
+            marquee = files[f'Platforms/_images/{platform_ids[0]}.bin']
+            require(len(marquee) == 521 * 165 * 2 and not any(marquee[1::2]),
+                    'Invalid Pocket platform marquee format')
+            require(hashlib.sha256(marquee).hexdigest() == manifest['marquee_sha256'],
+                    'Manifest marquee hash mismatch')
         require(len(bitstreams) == 1, 'Both games must use one bitstream')
         bitstream_path = base + bitstreams[0]['filename']
         require(hashlib.sha256(files[bitstream_path]).hexdigest() == manifest['pocket_bitstream_sha256'],
@@ -160,9 +168,12 @@ def audit(path):
             require(game in {'moomesa', 'bucky'} and save_name == game+'.sav', 'Wrong game/save pairing')
             seen_games.add(game); seen_saves.add(save_name)
             rom_path = f'Assets/{platform_ids[0]}/{core_id}/{rom_name}'
-            require(hashlib.sha256(files[rom_path]).hexdigest() == manifest['games'][game]['rom_sha256'],
-                    f'Manifest ROM hash mismatch: {game}')
-            require(len(files[rom_path]) == manifest['games'][game]['rom_bytes'], 'ROM size mismatch')
+            if rom_free_manifest is not None:
+                require(rom_path not in files, 'ROM-free release contains game ROM: ' + game)
+            else:
+                require(hashlib.sha256(files[rom_path]).hexdigest() == manifest['games'][game]['rom_sha256'],
+                        f'Manifest ROM hash mismatch: {game}')
+                require(len(files[rom_path]) == manifest['games'][game]['rom_bytes'], 'ROM size mismatch')
             preset_path = f'Presets/{core_id}/Interact/' + name[len('Assets/'):]
             preset = document(preset_path, 'interact')
             require(preset == definitions['interact'], 'Per-game DIP menu differs from core menu')
@@ -209,6 +220,44 @@ def audit(path):
                     len(dips[0]['options']) == 12 and number(dips[0]['mask']) == 0xfffffff0 and
                     {number(option['value']) for option in dips[0]['options']} ==
                     {0, 1, 2, 3, 4, 5, 6, 7, 12, 13, 14, 15}, 'Missing packed DIP menu')
+        cabinet_layout = manifest.get('cabinet_buttons_layout')
+        if cabinet_layout is not None:
+            require(cabinet_layout == 'optional_p1_selectors', 'Unknown cabinet button layout')
+            controllers = definitions['input']['controllers']
+            require(len(controllers) == 1 and controllers[0].get('type') == 'default',
+                    'Unexpected controller declaration')
+            mappings = controllers[0]['mappings']
+            require(len(mappings) == 6 and len({item['id'] for item in mappings}) == 6,
+                    'Expected six original gameplay control mappings')
+            require(mappings == [
+                {'id': 200, 'name': 'Jump', 'key': 'pad_btn_a'},
+                {'id': 201, 'name': 'Shoot', 'key': 'pad_btn_b'},
+                {'id': 202, 'name': 'Jump (alt)', 'key': 'pad_btn_y'},
+                {'id': 203, 'name': 'Bucky B3 / Moo alt', 'key': 'pad_btn_x'},
+                {'id': 204, 'name': 'Coin', 'key': 'pad_btn_select'},
+                {'id': 205, 'name': 'Start', 'key': 'pad_btn_start'},
+            ], 'Changed original gameplay controls')
+            require(not any(name.startswith(f'Presets/{core_id}/Input/') for name in files),
+                    'Unexpected per-asset Input override')
+            labels = ['Unassigned', 'A', 'B', 'X', 'Y', 'L', 'R', 'Select', 'Start']
+            for name, ident, shift in [('Test Button', 41, 16), ('Service Button', 42, 20)]:
+                fields = [item for item in variables if item.get('id') == ident]
+                require(len(fields) == 1, f'Missing optional {name}')
+                if len(fields) == 1:
+                    item = fields[0]
+                    require(item.get('name') == name and item.get('type') == 'list' and
+                            item.get('enabled') is True and item.get('persist') is True and
+                            item.get('defaultval') == 0 and number(item.get('address', 0)) == 0xf2000000 and
+                            number(item.get('mask', 0)) == (0xffffffff ^ (15 << shift)) and
+                            [(option['name'], number(option['value'])) for option in item['options']] ==
+                            [(label, index << shift) for index, label in enumerate(labels)],
+                            f'Invalid optional {name}: defaults, keys or preserve mask')
+            manual = [item for item in variables if item.get('id') == 40]
+            require(len(manual) == 1 and manual[0].get('name') == 'Test Switch (hold)' and
+                    manual[0].get('persist') is False and manual[0].get('defaultval') == 0 and
+                    number(manual[0].get('address', 0)) == 0xf2000000 and
+                    number(manual[0].get('mask', 0)) == 0xfffffeff and
+                    number(manual[0].get('value', 0)) == 0x100, 'Incorrect manual Test fallback')
         require(manifest['private_only'] is True and manifest['hardware_gameplay_verified'] is False,
                 'Incorrect private/hardware status')
         return {'passed': not issues, 'issues': sorted(set(issues)), 'core_id': core_id,
@@ -216,7 +265,8 @@ def audit(path):
                 'bitstream_filename': bitstreams[0]['filename'], 'games': sorted(seen_games),
                 'bitstream_filename_characters': len(bitstreams[0]['filename']), 'files': len(files),
                 'dip_menu_layout': dip_layout,
-                'scope': 'Static dual-game APF contracts and hashes; this package loading/settings pending'}
+                'cabinet_buttons_layout': cabinet_layout,
+                'scope': 'Static dual-game APF contracts and hashes; no hardware gameplay assertion'}
     require([number(slot['id']) for slot in slots] == [0, 1], 'Expected ROM slot 0 and EEPROM slot 1')
     rom_slot, save_slot = slots
     for slot in slots:

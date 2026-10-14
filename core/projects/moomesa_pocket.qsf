@@ -897,3 +897,16 @@ set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
 # pipeline shift registers, which both defeats the synchronisers and moves
 # jt51's paths out from under their multicycle (projects/moomesa_pocket.sdc).
 set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF
+
+# Optional-button fit seed 1 missed reset-to-JT51 setup by 0.264 ns.
+# Change placement only; preserve qualified RTL behavior, clocks and constraints.
+set_global_assignment -name SEED 2
+# Seed 2 closed the reset path but missed div-to-cen_phi1 setup by 0.040 ns.
+# Increase existing physical synthesis effort without changing RTL or SDC.
+set_global_assignment -name PHYSICAL_SYNTHESIS_EFFORT EXTRA
+
+# The direct clock decode passes, but cold setup misses JT51 EG by 0.073 ns.
+# Its first LUT (u_eg|Add5~29) is a direct fanout of the 2,833-load g_reset.
+# Give existing JT51 reset loads a local combinational copy; no added register,
+# reset cycle, clock change or timing exception. Check actual duplication in fit.
+set_instance_assignment -name DUPLICATE_ATOM jt51_reset_copy -from "core_top:ic|g_reset" -to "core_top:ic|moomesa_core:u_core|jt51:u_ym|*"
