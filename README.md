@@ -8,9 +8,8 @@ maintained by **mmmax4**, based on plasticbugs' Moo Mesa implementation.
   <img src="docs/images/bucky-title.png" width="320" height="240" alt="Bucky O'Hare title screen">
 </p>
 
-**Maintainer request:** please share this port free of charge and use it for
-noncommercial purposes. This is separate from the existing software licenses;
-see [the request and its limits](NONCOMMERCIAL_REQUEST.md).
+**License:** [GNU GPLv3](LICENSE) for the applicable project code. Original
+third-party licenses and notices remain in effect; see [licensing](LICENSING.md).
 
 ## Supported games
 

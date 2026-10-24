@@ -1,13 +1,8 @@
 # Licensing
 
-## Noncommercial use request
-
-The maintainer requests noncommercial use and free sharing; see
-[the request and its limits](NONCOMMERCIAL_REQUEST.md). This does not relicense
-GPL-covered code or add restrictions to third-party grants. Existing licenses
-and notices below remain applicable.
-
-This is a mixed source tree; existing per-file and module terms apply.
+The port's original integration contributions are licensed under
+**GNU GPL-3.0-or-later**; the GPLv3 text is provided in [LICENSE](LICENSE).
+This is a mixed source tree; existing per-file and module terms remain in effect.
 Plasticbugs / Scott granted reuse and derivative-core publication of his own
 contributions, with inherited credits preserved. See LICENSES/PLASTICBUGS-PERMISSION.md.
 
