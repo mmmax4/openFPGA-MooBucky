@@ -8,6 +8,10 @@ maintained by **mmmax4**, based on plasticbugs' Moo Mesa implementation.
   <img src="docs/images/bucky-title.png" width="320" height="240" alt="Bucky O'Hare title screen">
 </p>
 
+**Maintainer request:** please share this port free of charge and use it for
+noncommercial purposes. This is separate from the existing software licenses;
+see [the request and its limits](NONCOMMERCIAL_REQUEST.md).
+
 ## Supported games
 
 | Selection | ROM set | Image filename |
@@ -19,6 +23,13 @@ The core includes complete audio and independent ROM, EEPROM and per-game
 settings. Both games have passed Pocket tests. Other
 revisions are not qualified. A boot screen saying VERSION EA does not identify
 the EAB ROM image; use the verified image hashes in [ROM setup](docs/ROM_SETUP.md).
+
+## Version 0.4.1
+
+The latest release uses full game-title selections and matching per-game presets.
+Download [0.4.1](https://github.com/mmmax4/openFPGA-MooBucky/releases/tag/v0.4.1);
+see [release history](CHANGELOG.md). The release title is the version number;
+its tag, package and compiled hardware are unchanged.
 
 ## Installation
 
